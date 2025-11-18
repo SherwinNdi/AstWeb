@@ -12,7 +12,6 @@ const {
   content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
   image = await Astro.slots.render('image'),
-  isFullImage = false,
 
   id,
   bg = await Astro.slots.render('bg'),
@@ -77,39 +76,21 @@ const {
       >
         {
           image && (
-            isFullImage ? (
-              <div class="relative w-full h-screen">
-                {typeof image === 'string' ? (
-                  <Fragment set:html={image} />
-                ) : (
-                  <Image
-                    class="w-full h-full object-cover rounded-none"
-                    widths={[768, 1024, 2040]}
-                    sizes="100vw"
-                    loading="eager"
-                    width={2040}
-                    height={1080}
-                    {...image}
-                  />
-                )}
-              </div>
-            ) : (
-              <div class="relative m-auto max-w-5xl">
-                {typeof image === 'string' ? (
-                  <Fragment set:html={image} />
-                ) : (
-                  <Image
-                    class="mx-auto rounded-md w-full"
-                    widths={[400, 768, 1024, 2040]}
-                    sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-                    loading="eager"
-                    width={1024}
-                    height={576}
-                    {...image}
-                  />
-                )}
-              </div>
-            )
+            <div class="relative m-auto max-w-5xl">
+              {typeof image === 'string' ? (
+                <Fragment set:html={image} />
+              ) : (
+                <Image
+                  class="mx-auto rounded-md w-full"
+                  widths={[400, 768, 1024, 2040]}
+                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                  loading="eager"
+                  width={1024}
+                  height={576}
+                  {...image}
+                />
+              )}
+            </div>
           )
         }
       </div>
