@@ -2,8 +2,13 @@
 import { SITE } from 'astrowind:config';
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
-</span>
+<img
+  src="/src/assets/images/obrain-logo-white.png"
+  alt={SITE?.name}
+  class="h-10 md:h-8 w-auto dark:hidden"
+/>
+<img
+  src="/src/assets/images/obrain-logo-black.png"
+  alt={SITE?.name}
+  class="h-10 md:h-8 w-auto hidden dark:block"
+/>
