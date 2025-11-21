@@ -1,30 +1,30 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: OBRAIN LAB
+  site: 'https://obrainlab.com'
   base: '/'
   trailingSlash: false
-
+  # the next line needs update 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
 # Default SEO metadata
 metadata:
   title:
     default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    template: '%s — OBRAIN'
+  description: "OBRAIN Lab — a research group studying the interplay of obesity and the brain."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: OBRAIN
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    handle: '@obrainlab'
+    site: '@obrainlab'
     cardType: summary_large_image
 
 i18n:
@@ -62,7 +62,7 @@ apps:
 
     isRelatedPostsEnabled: true
     relatedPostsCount: 4
-
+# Analytics configuration needs update
 analytics:
   vendors:
     googleAnalytics:
