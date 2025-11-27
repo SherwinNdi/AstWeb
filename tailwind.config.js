@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 import typographyPlugin from '@tailwindcss/typography';
+//import { fontProviderSchema } from 'node_modules/astro/dist/assets/fonts/config';
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
@@ -27,6 +28,14 @@ export default {
         fadeInUp: {
           '0%': { opacity: 0, transform: 'translateY(2rem)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            p: { fontSize: '1rem', lineHeight: '1.75rem' },
+            h1:{fontSize : '2rem'},
+          },
         },
       },
     },
