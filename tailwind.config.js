@@ -35,6 +35,17 @@ export default {
           css: {
             p: { fontSize: '1rem', lineHeight: '1.75rem' },
             h1:{fontSize : '2rem'},
+            h2:{fontSize : '1.5rem'},
+            h3:{fontSize : '1.25rem'},
+            a: {
+              color: 'var(--aw-color-text-default)',
+              textDecoration: 'underline',
+              fontWeight: '500',
+              '&:hover': {
+                color: 'var(--aw-color-primary)',
+              },
+            },
+            
           },
         },
       },
