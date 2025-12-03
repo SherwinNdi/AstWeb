@@ -1,0 +1,369 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+
+const metadata = {
+  title: 'Projects Landing Page',
+};
+---
+
+
+<!-- This commented section adds button to the Header slot of this page and shoeld be placed under {...headerData} 
+ 
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+
+
+-->
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+
+      isSticky
+    />
+  </Fragment>
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="Projects Web Demo"
+    actions={[
+      { variant: 'primary', target: '_blank', text: 'Get Started', href: 'https://github.com/arthelokyo/astrowind' },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AstroWind Hero Image',
+    }}
+  >
+    <Fragment slot="title">
+      Simplify web design with Astrowind: <br /> your ultimate <span class="text-accent dark:text-white">Projects</span> companion<br
+      />
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        Elevate your website creation process with <span class="font-semibold">AstroWind</span>'s Projects solutions.</span
+      >
+      Seamlessly blend the power of Astro 5.0 and Tailwind CSS to craft websites that resonate with your brand and audience.
+    </Fragment>
+  </Hero2>
+
+  
+  <!-- Project 1 **************** -->
+
+  <Content
+    title="Current Research Portfolio"
+    subtitle="The Laboratory's Pursuit of Foundational and Applied Breakthroughs."
+    isReversed
+    items={[
+      {
+        title: 'Description:',
+        description:
+          'In collaboration with the IFB AdipositasErkrankungen in Leipzig, we investigate flexible goal-directed decision-making processes in a cohort of adolescent and adult obesity patients with and without BED. In this way, we want to systematically differentiate the neurocognitive mechanisms of obesity and BED in adolescence and adulthood. We use functional magnetic resonance imaging (fMRI) to probe two crucial components of goal-directed decision-making: reversal learning and working memory updating and maintenance. Because alterations in dopaminergic signaling have previously been implicated in goal-directed decision-making as well as BED and obesity, we also investigate whether these neurocognitive measures are associated with genetic and imaging proxies of prefrontal and striatal dopamine function.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1620558138198-cfb9b4f3c294?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1671&q=80',
+      alt: 'Startup Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-medium tracking-tight dark:text-white sm:text-1xl mb-2">
+        Shared and Differential Neurocognitive Mechanisms in Obesity and Binge Eating Disorder from Adolescence to Adulthood." <br />
+      </h3>
+    </Fragment>
+    <Fragment slot="content">
+      <!-- Project Links -->
+      <div class="flex gap-3 mt-2">
+        <a href="https://github.com/your-username/project1" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 rounded-lg transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://osf.io/fyn6q/overview" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+          OSF
+        </a>
+      </div>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Project 2 **************** -->
+
+  <Content
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: `Building on findings from animal studies we are interested in whether a higher intake of saturated fats and refined sugar is associated with differences in dopamine-related cognition. We recruited participants based on their self-reported fat and sugar intake, grouped them into low and high consumers and compared their performance on five different cognitive tasks – two of which were performed in the MRI scanner. Additionally, two genetic variants related to dopamine were analyzed and linked to dietary intake and cognition.`,
+      },
+
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531973486364-5fa64260d75b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1658&q=80',
+      alt: 'Projects Image',
+    }}
+  >
+    
+    <Fragment slot="content">
+      <h3 class="text-2xl font-medium tracking-tight dark:text-white sm:text-1xl mb-2">
+        The association of dietary fat and sugar with cognition <br />
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+
+    <Fragment slot="content">
+      <!-- Project Links -->
+      <div class="flex gap-3 mt-2">
+        <a href="https://github.com/your-username/project1" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 rounded-lg transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://osf.io/vs8cm/overview" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+          OSF
+        </a>
+      </div>
+    </Fragment>
+  </Content>
+
+  <!-- Project 3 **************** -->
+
+  <Content
+    isReversed
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: `Previous studies suggest that there are unconscious signals to the reward system that influence food choice and that are created and maintained as a consequence of our modern, obesity-promoting environment. To confirm and extend these results in a Finnish sample, we aim to investigate macronutrient combinations such as carbohydrates and fat food items along with food processing and examine their effects on food motivation. Using a series of food questionnaires, a behavioral task as a proxy for food reward, and functional magnetic resonance (fMRI), we hope to move closer to understanding the effects of modern diets on human eating behavior in individuals with a wide range of BMI.`,
+      },
+      {
+        title: 'Core Idea:',
+        description: ` The core idea behind this project is ...`,
+      },
+    ]}
+    image={{
+      src: '~/assets/images/projects/marvel.png',
+      alt: 'Portfolio Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-medium tracking-tight dark:text-white sm:text-1xl mb-2">
+        Modern Alimentation effects on Reward, behaViour and the gut Environment in the finnish dietary Lifestyle (MARVEL) <br />
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+
+    <Fragment slot="content">
+      <!-- Project Links -->
+      <div class="flex gap-3 mt-2">
+        <a href="https://github.com/your-username/project1" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 rounded-lg transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://osf.io/vs8cm/overview" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+          OSF
+        </a>
+      </div>
+    </Fragment>
+  </Content>
+
+
+  <!-- Project 4 **************** -->
+
+  <Content
+    items={[
+      {
+        title: 'Description:',
+        description: `Synthesized from dopamine, neuromelanin accumulates with age. Concentrations of neuromelanin have been shown to correlate to dopamine release. Findings in animal studies suggest that following a diet high in fat and sugar induces dopaminergic changes. However, how these alterations relate to long-time changes within the brain’s dopaminergic pathways is not known, and therefore we investigate whether a higher intake of saturated fats and refined sugar is associated with differences in neuromelanin concentration in humans. We do this using quantitative susceptibility mapping (QSM), an MRI technique that is sensitive to paramagnetic substances.`,
+      },
+
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1514621166532-aa7eb1a3a2f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: 'Small Business Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-medium tracking-tight dark:text-white sm:text-2xl mb-2">
+        The association between a high-fat and high-sugar diet and neuromelanin concentration <br />
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+
+    
+  </Content>
+
+  <!-- Project 4 **************** -->
+
+  <Content
+    items={[
+      {
+        title: 'Description:',
+        description: `Synthesized from dopamine, neuromelanin accumulates with age. Concentrations of neuromelanin have been shown to correlate to dopamine release. Findings in animal studies suggest that following a diet high in fat and sugar induces dopaminergic changes. However, how these alterations relate to long-time changes within the brain’s dopaminergic pathways is not known, and therefore we investigate whether a higher intake of saturated fats and refined sugar is associated with differences in neuromelanin concentration in humans. We do this using quantitative susceptibility mapping (QSM), an MRI technique that is sensitive to paramagnetic substances.`,
+      },
+
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1514621166532-aa7eb1a3a2f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: 'Small Business Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-medium tracking-tight dark:text-white sm:text-2xl mb-2">
+        The association between a high-fat and high-sugar diet and neuromelanin concentration <br />
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+
+    
+  </Content>
+
+  <!-- Pricing Widget ******************* -->
+
+  <Pricing
+    title="Flexible pricing plans"
+    prices={[
+      {
+        title: 'free',
+        subtitle: 'Access to core features and a wide range of templates',
+        price: '0',
+        period: '/ month',
+        callToAction: {
+          target: '_blank',
+          text: 'Get Started for Free',
+          href: '#',
+        },
+      },
+      {
+        title: 'pro',
+        subtitle: 'Premium templates and advanced customization',
+        price: 15,
+        period: '/ Month',
+        callToAction: {
+          target: '_blank',
+          text: 'Upgrade to Pro',
+          href: '#',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'popular',
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Tailored solutions for large-scale projects',
+        price: 45,
+        period: '/ Month',
+        callToAction: {
+          target: '_blank',
+          text: 'Unlock Enterprise Features',
+          href: '#',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Is AstroWind compatible with the latest versions of Astro and Tailwind CSS?',
+        description:
+          'Yes, AstroWind is designed to be compatible with the latest versions of both Astro and Tailwind CSS. This ensures that you can harness the full capabilities of these technologies while benefiting from the features offered by AstroWind.',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'Can I use AstroWind for both personal and commercial projects?',
+        description: `Certainly! AstroWind is versatile and can be used for a wide range of projects, including both personal and commercial endeavors. Whether you're building a professional portfolio, launching a startup, or creating a marketing website, AstroWind has you covered.`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'What level of coding knowledge is required to use AstroWind?',
+        description:
+          'While some familiarity with HTML, CSS, and web development concepts is helpful, the user-friendly interface and customization options allow those with limited coding experience to create impressive websites. For more advanced users, AstroWind offers extensive customization capabilities.',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'Is customer support available for AstroWind users seeking guidance?',
+        description: `Absolutely, our dedicated customer support team is here to assist you with any questions or challenges you may encounter. Feel free to reach out to us through our support channels, and we'll be happy to provide the help you need.`,
+        icon: 'tabler:chevrons-right',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
