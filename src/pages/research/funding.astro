@@ -3,14 +3,11 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Content from '~/components/widgets/Content.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
+
 import Stats from '~/components/widgets/Stats.astro';
 import CollaborationsMap from '~/components/widgets/CollaborationsMap.astro';
 import Button from '~/components/ui/Button.astro';
-import Image from '~/components/common/Image.astro';
+
 import Brands from '~/components/widgets/Brands.astro';
 import { headerData } from '~/navigation';
 
@@ -56,211 +53,84 @@ const metadata = {
 
   <!-- Funders ************* -->
  <Brands
-    title="Funders of our research"
-    subtitle="We are grateful for the support of our funders"
+    title="Funders and collaborators to our research"
+    subtitle="We are grateful for the support of our funders and collaborators, who make our research possible."
     icons={[]}
     images={[
       {
         src: '/logos/university-helsinki.png',
         alt: 'University of Helsinki',
+        href: 'https://www.helsinki.fi/en',
+        width: 150,
+        height: 150,
       },
       {
         src: '/logos/wihuri-foundation.png',
         alt: 'Jenny and Antti Wihuri Foundation',
+        href: 'https://wihurinrahasto.fi/',
+        width: 150,
+        height: 150,
       },
+      {
+        src: '/logos/logo-fazit-stiftung.png',
+        alt: 'Fazit Stiftung',
+        href: 'https://www.fazit-stiftung.de/',
+        width: 300,
+        height: 300,
+      },
+ 
       {
         src: '/logos/bmbf.png',
-        alt: 'Federal Ministry of Education and Research',
-      },
-      {
-        src: '/logos/dfg.png',
-        alt: 'Deutsche Forschungsgemeinschaft',
-      },
-      {
-        src: '/logos/fazit-stiftung.png',
-        alt: 'Fazit Stiftung',
+        alt: 'Bundesministerium für Bildung und Forschung (BMBF)',
+        href: 'https://www.bmbf.de/en/index.html',
+        width: 300,
+        height: 300,
       },
       {
         src: '/logos/finnish-education.png',
         alt: 'Finnish National Agency for Education',
+        href: 'https://www.oph.fi/en',
+        width: 300,
+        height: 300,
       },
       {
-        src: '/logos/ifb.png',
-        alt: 'Integriertes Forschungs- und Behandlungszentrum',
+        src: '/logos/Logo_MFL.png',
+        alt: 'University of Leipzig, Faculty of Medicine',
+        href: 'http://www.uni-leipzig.de/nc/en/university/faculties-and-central-institutions/faculties/fakultaetdetail.html',
+        width: 300,
+        height: 300,
       },
       {
         src: '/logos/max-planck.png',
         alt: 'Max Planck Institute',
+        href: 'https://www.cbs.mpg.de/en',
+        width: 500,
+        height: 500,
       },
       {
-        src: '/logos/academy-finland.png',
+        src: '/logos/academy-finland.svg',
         alt: 'Academy of Finland',
+        href: 'https://www.aka.fi/en/',
+        width: 300,
+        height: 300,
       },
     ]}
 
 
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'User-friendly interface',
-        description:
-          'An intuitive and easy-to-navigate interface that allows users to quickly browse and find the templates they need.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Personalization options',
-        description:
-          'Include basic customization tools that let users modify text, colors, images, and other elements within the templates.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Ready-to-use components',
-        description:
-          'Enhance your designs with ready-to-use elements like graphics, icons, and layouts, saving you time and boosting visual appeal.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Preview Mode',
-        description: 'Provide a preview of each template, allowing users to see how it looks before making a purchase.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Offline Access',
-        description: 'Offer the option for users to download purchased templates for offline use.',
-        icon: 'tabler:wifi-off',
-      },
-      {
-        title: 'Secure Cloud Storage',
-        description:
-          'Provide cloud storage for purchased templates, ensuring users can access and back up their templates from anywhere securely.',
-        icon: 'tabler:file-download',
-      },
-      {
-        title: 'Regular Updates',
-        description: 'Continuously add new templates and features to keep the app fresh and engaging for users.',
-        icon: 'tabler:refresh',
-      },
-      {
-        title: 'Wishlist',
-        description: `Allow users to create a wishlist of templates they're interested in, making it easier for them to revisit and potentially purchase later.`,
-        icon: 'tabler:heart',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Vintage Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Other features</h3>
-    </Fragment>
-  </Content>
+ />
 
   <!-- Stats Widget ****************** -->
 
   <Stats
-    title="Statistics of our app"
+    title="Satistics of grant amounts we have received for our research through various funding bodies"
     stats={[
-      { amount: '20K', icon: 'tabler:download' },
-      { amount: '18.5K', icon: 'tabler:users' },
-      { amount: '4.7', icon: 'tabler:user-star' },
+      { amount: '10 m€', title: 'Total Received Grants', icon: 'tabler:download' },
+      { amount: '30', title: 'Researchers Involved', icon: 'tabler:users' },
+      { amount: '60+', title: 'Grant Applications', icon: 'tabler:file-text' },
     ]}
   />
 
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="What our users say?"
-    testimonials={[
-      {
-        testimonial: `It's made exploring and downloading website templates a breeze. The interface is intuitive, and I had no trouble finding the perfect template for my project. It's an app that truly empowers users.`,
-        name: 'Cary Kennedy',
-        job: 'Film director',
-        image: {
-          src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          alt: 'Cary Kennedy Image',
-        },
-      },
-      {
-        testimonial: `The app's seamless download process and intuitive layout have made selecting templates an enjoyable experience. Being able to preview and experiment with different designs before committing has saved me time and ensured I get the perfect look for my website.`,
-        name: 'Josh Wilkinson',
-        job: 'Product Manager',
-        image: {
-          src: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          alt: 'Josh Wilkinson Image',
-        },
-      },
-      {
-        testimonial:
-          'I was able to download and use a professional website template within minutes. The step-by-step process and user-friendly interface made it easy for me to create a website that looks as if it was designed by a pro.',
-        name: 'Sidney Hansen',
-        job: 'Decorator',
-        image: {
-          src: 'https://images.unsplash.com/photo-1512361436605-a484bdb34b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          alt: 'Sidney Hansen Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'Read more testimonials',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Still have some doubts?"
-    items={[
-      {
-        title: 'What does this app do?',
-        description:
-          'This app provides a platform for you to easily browse, purchase, download, and use a wide range of website templates for your projects.',
-      },
-      {
-        title: 'How can this app solve my problem?',
-        description:
-          'This app streamlines the process of finding and implementing professional website designs, saving you time and effort in creating visually appealing and functional websites.',
-      },
-      {
-        title: 'Is it available for my device?',
-        description: `Our app is designed for compatibility across various devices and platforms, ensuring accessibility whether you're using a smartphone, tablet, or computer.`,
-      },
-      {
-        title: 'What makes this app different from others?',
-        description:
-          'Our app stands out for its user-friendly interface, extensive template collection, and seamless integration of the purchasing and downloading process, making it highly efficient.',
-      },
-      {
-        title: 'Are there any costs involved?',
-        description:
-          'While the app itself may be free to download, there may be costs associated with purchasing specific templates based on your preferences and project requirements.',
-      },
-    ]}
-  />
-
+  
 
 
 <!-- CollaborationsMap Widget *********** -->
@@ -291,20 +161,39 @@ const metadata = {
   </Fragment>
 </CollaborationsMap>
 
-  <!-- CallToAction Widget *********** -->
+  <!-- CallToAction Widget - Support Research *********** -->
 
   <CallToAction
-    id="download"
-    title="Download our app now!"
-    subtitle="Access a variety of stunning templates, simplify your creative process, and elevate your online presence."
+    id="support"
+    title="You care for Obesity and Eating Behavior? Support Our Research"
+    subtitle="Your contribution helps advance our understanding of brain development and learning. Every donation directly funds cutting-edge research, equipment, and opportunities for early-career researchers."
   >
-    <div slot="actions" class="flex max-w-sm gap-4">
-      <Button variant="link" href={appStoreDownloadLink}>
-        <Image src={appStoreImg} alt="App Store Image" width={200} />
+    <div slot="actions" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <Button variant="primary" href="https://www.helsinki.fi/en/about-us/support-us" target="_blank" class="min-w-[200px]">
+        <span class="flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+          Make a Donation
+        </span>
       </Button>
 
-      <Button variant="link" href={googlePlayDownloadLink}>
-        <Image src={googlePlayImg} alt="Google Play Image" width={200} />
+      <Button variant="secondary" href="/contact" class="min-w-[200px]">
+        <span class="flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Partner With Us
+        </span>
+      </Button>
+
+      <Button variant="tertiary" href="https://www.helsinki.fi/en/research" target="_blank" class="min-w-[200px]">
+        <span class="flex items-center gap-3 whitespace-nowrap">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Learn More
+        </span>
       </Button>
     </div>
   </CallToAction>
