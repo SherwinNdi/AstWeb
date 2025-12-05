@@ -1,0 +1,43 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+
+export interface Props extends Widget {
+  content?: string;
+  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  isDark?: boolean;
+}
+
+const {
+  content = await Astro.slots.render('content'),
+  textAlign = 'justify',
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const alignmentClass = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right',
+  justify: 'text-justify',
+}[textAlign];
+---
+
+<WidgetWrapper 
+  id={id} 
+  isDark={isDark} 
+  containerClass={`w-full mx-auto ${classes?.container ?? ''}`} 
+  bg={bg}
+>
+  <div class={`w-full p-6 md:p-8 ${alignmentClass}`}>
+    {content ? (
+      <div class="text-base md:text-lg dark:text-slate-300" set:html={content} />
+    ) : (
+      <div class="text-base md:text-lg dark:text-slate-300">
+        <slot name="content" />
+      </div>
+    )}
+  </div>
+</WidgetWrapper>
