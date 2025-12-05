@@ -10,12 +10,12 @@ export const headerData = {
           href: getPermalink('/research/projects'),
         },
         {
-          text: 'Startup',
-          href: getPermalink('/research/startup'),
+          text: 'Methods',
+          href: getPermalink('/research/methods'),
         },
         {
-          text: 'Mobile App',
-          href: getPermalink('/research/mobile-app'),
+          text: 'Funding',
+          href: getPermalink('/research/funding'),
         },
         {
           text: 'Personal',

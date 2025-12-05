@@ -1,0 +1,62 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { Widget } from '~/types';
+
+export interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  collaborations?: Array<{
+    name: string;
+    location: string;
+    description?: string;
+  }>;
+}
+
+const {
+  title = 'Collaborations',
+  subtitle = '',
+  tagline = '',
+  collaborations = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Google Maps Embed API - You'll need to replace YOUR_API_KEY with actual Google Maps API key
+// Or use iframe embed for simpler approach
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  
+  <!-- Google Maps Embed -->
+  <div class="w-full h-[600px] rounded-lg overflow-hidden shadow-lg mb-8">
+    <iframe
+      src="https://www.google.com/maps/d/embed?mid=YOUR_MAP_ID&ehbc=2E312F"
+      width="100%"
+      height="600"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- Collaboration List -->
+  {collaborations.length > 0 && (
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {collaborations.map((collab) => (
+        <div class="p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md">
+          <h3 class="text-xl font-bold mb-2">{collab.name}</h3>
+          <p class="text-muted text-sm mb-2">{collab.location}</p>
+          {collab.description && (
+            <p class="text-sm">{collab.description}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</WidgetWrapper>

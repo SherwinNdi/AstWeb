@@ -1,0 +1,178 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+//import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import Features2 from '~/components/widgets/Features2.astro';
+//import Features from '~/components/widgets/Features.astro';
+//import Stats from '~/components/widgets/Stats.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+//import FAQs from '~/components/widgets/FAQs.astro';
+//import Brands from '~/components/widgets/Brands.astro';
+
+const metadata = {
+  title: 'Methods Landing Page',
+};
+---
+
+<Layout metadata={metadata}>
+
+
+  <!-- Full Screen Video Section ************** -->
+
+  <section class="relative w-full h-[90vh] overflow-hidden">
+    <div class="absolute inset-0">
+      <iframe 
+        src="https://www.youtube.com/embed/IIX78qGYeAo?autoplay=1&mute=1&loop=1&playlist=IIX78qGYeAo&controls=0&showinfo=0&rel=0&modestbranding=1" 
+        frameborder="0" 
+        allow="autoplay; fullscreen" 
+        class="absolute top-0 left-0 w-full h-full object-cover"
+        title="Full Screen Background Video"
+        style="pointer-events: none;">
+      </iframe>
+    </div>
+    
+    <!-- Optional overlay content -->
+<!--     <div class="relative z-10 flex items-center justify-center h-full bg-black/30">
+      <div class="text-center text-white px-4">
+        <h2 class="text-4xl md:text-6xl font-bold mb-4">Research Methods</h2>
+        <p class="text-xl md:text-2xl max-w-2xl mx-auto">
+          Explore our innovative approaches to scientific research
+        </p>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="About Technologies we utilize"
+    subtitle="Our lab employs a diverse array of cutting-edge methodologies to explore the complexities of human behavior and brain function in relation to obesity."
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="The O’BRAIN Lab has access to a range of methodological devices:"
+    subtitle="A short overview of the main methods we use in our research projects...."
+    items={[
+      {
+        title: 'Magnetic Resonance Imaging (MRI)',
+        description:
+          'With the help of Magnetic Resonance Imaging (MRI), we take our behavioral research one step further and explore neural correlates of obesity-related behavioral differences. All MRI-techniques use strong but harmless magnetic fields to image the human brain and identify structural alterations or specific brain regions that are engaged during a task.',
+        image: '/icons/mri_website.png',
+        //
+      },
+      {
+        title: 'Questionnaires and behavioral experiments',
+        description:
+          'Our studies combine data from validated questionnaires with other behavioral, anthropometric, and physiological measures from our participants. With these questionnaires we look into personality traits, eating behavior or assess dietary patterns.',
+        //icon: 'flat-color-icons:template',
+        image: '/icons/questionnaires_website.png',
+      },
+      {
+        title: 'Eye tracking',
+        description:
+          'Eye tracking uses projection patterns and optical sensors to gather data about the position and movement of eye and gaze direction. This data can inform us for example about an individual’s attention or center of focus.',
+        //icon: 'flat-color-icons:voice-presentation',
+        image: '/icons/eyetracking_website.png',
+      },
+        {
+        title: 'Electroencephalography (EEG)',
+        description:
+          'The brain operates by discharging very small electrical impulses, sending information from one brain area to the other. Electroencephalography (EEG) picks up on these electrical activations in a millisecond resolution and in this way can record brain activity relevant to a certain task in a very precise temporal manner. In order to record the signal, participants will be asked to put on a fabric cap which has a number of (32 up to 128) microdisk electrodes attached to it. Because hair usually prohibits the electrodes from being directly in contact with the surface of the head, a tiny bit of wet gel is applied to each electrode individually in order to build a “bridge” between the surface of the head and the electrode.',
+        //icon: 'flat-color-icons:voice-presentation',
+        image: '/icons/eeg2_website.png',
+      },
+            {
+        title: 'Transcranial direct-current stimulation (tDCS)',
+        description:
+          'Description for tDCS method goes here.',
+        //icon: 'flat-color-icons:voice-presentation',
+        image: '/icons/tdcs_website.png',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="Let us know how we can help"
+    subtitle="We’re here to help and answer any question you might have."
+    columns={4}
+    items={[
+      {
+        title: 'Phone',
+        icon: 'tabler:phone',
+        callToAction: {
+          target: '_blank',
+          text: 'Call us',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Email',
+        icon: 'tabler:mail',
+        callToAction: {
+          target: '_blank',
+          text: 'Write to us',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Chat with sales',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'Start chatting',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Chat with support',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'Start chatting',
+          href: '/',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        target: '_blank',
+        text: 'Get templates',
+        href: 'https://github.com/arthelokyo/astrowind',
+        icon: 'tabler:download',
+      },
+    ]}
+  >
+    <Fragment slot="title">Be a part of our vision</Fragment>
+
+    <Fragment slot="subtitle">
+      Discover a dynamic work environment, unparalleled growth opportunities, and the chance to make a meaningful
+      impact.
+    </Fragment>
+  </CallToAction>
+</Layout>

@@ -2,17 +2,17 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
-
-import Hero2 from '~/components/widgets/Hero2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Content from '~/components/widgets/Content.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
-
+import CollaborationsMap from '~/components/widgets/CollaborationsMap.astro';
 import Button from '~/components/ui/Button.astro';
 import Image from '~/components/common/Image.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import { headerData } from '~/navigation';
 
 const appStoreImg = '~/assets/images/app-store.png';
 const appStoreDownloadLink = 'https://github.com/arthelokyo/astrowind';
@@ -21,13 +21,13 @@ const googlePlayImg = '~/assets/images/google-play.png';
 const googlePlayDownloadLink = 'https://github.com/arthelokyo/astrowind';
 
 const metadata = {
-  title: 'Mobile App Homepage',
+  title: 'Funding & Collaborations',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- <Fragment slot="announcement"></Fragment> -->
-  <Fragment slot="header">
+<!--   <Fragment slot="header">
     <Header
       position="left"
       links={[
@@ -45,76 +45,60 @@ const metadata = {
       showToggleTheme
     />
   </Fragment>
+ -->
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      showToggleTheme
+      isSticky
+    />
+  </Fragment>
 
-  <!-- Hero2 Widget ******************* -->
-
-  <Hero2
-    tagline="Mobile App Web Demo"
-    image={{
-      src: 'https://images.unsplash.com/photo-1535303311164-664fc9ec6532?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  >
-    <Fragment slot="title">
-      <span class="text-accent dark:text-white">AstroWind App</span>: <br /> professional websites <span
-        class="hidden xl:inline">made easy</span
-      >
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        Unlock boundless creativity at your fingertips: your gateway to innovative design.
-      </span>
-      Download now and embark on a journey to elevate your projects like never before.
-    </Fragment>
-
-    <div slot="actions" class="flex max-w-sm gap-4">
-      <Button variant="link" href={appStoreDownloadLink}>
-        <Image src={appStoreImg} alt="App Store Image" width={200} />
-      </Button>
-
-      <Button variant="link" href={googlePlayDownloadLink}>
-        <Image src={googlePlayImg} alt="Google Play Image" width={200} />
-      </Button>
-    </div>
-  </Hero2>
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    id="features"
-    title="How to use our app?"
-    subtitle="Tired of spending hours crafting documents from scratch? Our app offers an innovative solution. With a wide array of professionally designed templates, you can now create stunning documents in minutes. Explore our templates now and experience the difference."
-    tagline="Step-by-step guide"
-    columns={2}
-    items={[
+  <!-- Funders ************* -->
+ <Brands
+    title="Funders of our research"
+    subtitle="We are grateful for the support of our funders"
+    icons={[]}
+    images={[
       {
-        title: 'Download and install the app',
-        description: `Begin your journey by downloading our user-friendly app from your device's app store or our official website.`,
-        icon: 'tabler:square-number-1',
+        src: '/logos/university-helsinki.png',
+        alt: 'University of Helsinki',
       },
       {
-        title: 'Sign up',
-        description:
-          'Create your account by providing the necessary information, enabling you to access our full range of features.',
-        icon: 'tabler:square-number-2',
+        src: '/logos/wihuri-foundation.png',
+        alt: 'Jenny and Antti Wihuri Foundation',
       },
       {
-        title: 'Browse templates',
-        description: 'Explore our diverse collection of website templates, categorized for easy navigation.',
-        icon: 'tabler:square-number-3',
+        src: '/logos/bmbf.png',
+        alt: 'Federal Ministry of Education and Research',
       },
       {
-        title: 'Preview and select a template',
-        description: `Visualize the potential of each template through previews, then choose the one that aligns best with your project's needs.`,
-        icon: 'tabler:square-number-4',
+        src: '/logos/dfg.png',
+        alt: 'Deutsche Forschungsgemeinschaft',
+      },
+      {
+        src: '/logos/fazit-stiftung.png',
+        alt: 'Fazit Stiftung',
+      },
+      {
+        src: '/logos/finnish-education.png',
+        alt: 'Finnish National Agency for Education',
+      },
+      {
+        src: '/logos/ifb.png',
+        alt: 'Integriertes Forschungs- und Behandlungszentrum',
+      },
+      {
+        src: '/logos/max-planck.png',
+        alt: 'Max Planck Institute',
+      },
+      {
+        src: '/logos/academy-finland.png',
+        alt: 'Academy of Finland',
       },
     ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1521517407911-565264e7d82d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
+
+
 
   <!-- Content Widget **************** -->
 
@@ -276,6 +260,36 @@ const metadata = {
       },
     ]}
   />
+
+
+
+<!-- CollaborationsMap Widget *********** -->
+ <CollaborationsMap
+  title="Our Collaborations"
+  subtitle="We work with leading institutions around the world"
+  collaborations={[
+    {
+      name: 'University of Helsinki',
+      location: 'Helsinki, Finland',
+      description: 'Faculty of Medicine, Psychology Department'
+    },
+    {
+      name: 'Max Planck Institute',
+      location: 'Leipzig, Germany',
+      description: 'Human Cognitive and Brain Sciences'
+    },
+    {
+      name: 'University of Zurich',
+      location: 'Zurich, Switzerland',
+      description: 'Department of Economics'
+    },
+    // Add more collaborations
+  ]}
+>
+  <Fragment slot="bg">
+    <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+  </Fragment>
+</CollaborationsMap>
 
   <!-- CallToAction Widget *********** -->
 
