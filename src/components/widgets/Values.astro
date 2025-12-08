@@ -1,0 +1,62 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { Steps as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  items = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Greek numerals mapping
+//const greekNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    classes={{
+      container: 'text-center mb-12 md:mb-16',
+      title: 'mb-4 text-3xl lg:text-4xl font-bold font-heading',
+      subtitle: 'mb-8 text-xl text-muted dark:text-slate-400',
+    }}
+  />
+
+  <div class="space-y-8 md:space-y-12">
+    {
+      items && items.length
+        ? items.map(({ title: title2, description }) => (
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div class="flex-shrink-0">
+                <div class="flex w-16 h-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 p-3">
+                  <img 
+                    src="/icons/Values3_Black.png" 
+                    alt="Value icon" 
+                    class="w-full h-full object-contain dark:hidden"
+                  />
+                  <img 
+                    src="/icons/Values3_White.png" 
+                    alt="Value icon" 
+                    class="w-full h-full object-contain hidden dark:block"
+                  />
+                </div>
+              </div>
+              <div class="flex-grow">
+                <h3 class="mb-3 text-xl font-semibold font-heading dark:text-white" set:html={title2} />
+                <p class="text-muted dark:text-gray-400 text-justify leading-relaxed" set:html={description} />
+              </div>
+            </div>
+          ))
+        : ''
+    }
+  </div>
+</WidgetWrapper>

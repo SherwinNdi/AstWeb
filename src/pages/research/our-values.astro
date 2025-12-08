@@ -3,9 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Header from '~/components/widgets/Header.astro';
 import Hero3 from '~/components/widgets/Hero3.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
-import Content from '~/components/widgets/Content.astro';
+import Values from '~/components/widgets/Values.astro';
 
 import { headerData } from '~/navigation';
 
@@ -51,106 +50,73 @@ const metadata = {
     </Fragment>
   </Hero3>
 
-  <!-- Steps2 Widget ****************** -->
 
-  <Steps2
-    title="Our Core Values"
-    subtitle="Four fundamental principles that guide everything we do at O'BRAIN Lab"
-    items={[
-      {
-        title: 'Value I',
-        description: 'We strive to offer an inclusive environment for a diverse set of people',
-      },
-      {
-        title: 'Value II',
-        description: 'We take the wellbeing of each of our team members seriously and communicate openly and respectfully',
-      },
-      {
-        title: 'Value III',
-        description: 'We foster autonomy and seek to provide opportunity for personal and professional development',
-      },
-      {
-        title: 'Value IV',
-        description: 'We practice science in an open, collaborative, and resourceful way',
-      },
-    ]}
-  />
 
-  <!-- Content Widget - Value IV Details **************** -->
 
-  <Content
-    id="value-iv"
-    isReversed
-    items={[
-      {
-        title: 'Collaborative Science',
-        description: 'We acknowledge that science is a joint effort rather than a competition. We do not want success on the back of other people\'s failure.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'Transparency',
-        description: 'We want to be transparent and accurate in the way we practice science and communicate our research findings.',
-        icon: 'tabler:eye',
-      },
-      {
-        title: 'Open Research',
-        description: 'This includes publicly pre-registering our new projects, presenting project proposals at conferences instead of only polished results.',
-        icon: 'tabler:lock-open',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-      alt: 'Collaborative research environment',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Open, Collaborative, and Resourceful Science
-      </h3>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget - Responsibility **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Volunteer Care',
-        description: 'We care for the volunteers that participate in our studies and value their contribution to science.',
-        icon: 'tabler:heart-handshake',
-      },
-      {
-        title: 'Public Accountability',
-        description: 'The same holds for tax payers that make most of our research possible. To make most of the public funds made available to us, we try to be as resourceful as we can.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Ethical Standards',
-        description: 'We comply as much as possible with good clinical practice to guarantee high ethical standards of our studies.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Science Communication',
-        description: 'By means of active science communication we aim to give back to the community in terms of knowledge and education.',
-        icon: 'tabler:speakerphone',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Research responsibility',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Our Responsibility to Society
-      </h3>
-    </Fragment>
-  </Content>
+  <Values
+  title="Our Core Values"
+  subtitle="Four fundamental principles that guide everything we do"
+  items={[
+    {
+      title: 'I. WE STRIVE TO OFFER AN INCLUSIVE ENVIRONMENT FOR A DIVERSE SET OF PEOPLE',
+      description: `
+        <p class="mb-4 text-justify">When hiring, we ask candidates not to include a photo and to forgo mentions of their age, nationality, 
+        or marital status in their application. Whenever possible, our lab manager also removes references to name and 
+        gender before we consider it. All contenders are interviewed by multiple team members to reduce potential bias 
+        and to give the interviewees the opportunity to get a feel for the group. Beyond skill and motivation, 
+        we also take into account applicants’ personal and professional goals and consider carefully whether and how these can 
+        be achieved within the lab.</p>
+        <p class="mb-4 text-justify">We consider ourselves to be an inclusive group that welcomes new-comers. We have core working 
+        times to foster cooperation and social interaction between group members. We have no regular meetings after 3 pm to ensure 
+        family commitments can be met. We speak English to accommodate different language backgrounds in the group.</p>
+      `,
+    },
+    {
+      title: 'II. WE TAKE THE WELLBEING OF EACH OF OUR TEAM MEMBERS SERIOUSLY AND COMMUNICATE OPENLY AND RESPECTFULLY',
+      description: `
+        <p class="mb-4 text-justify">We attempt to make each individual feel welcome and comfortable in the lab. We are a 
+        colourful bunch of personalities and invite every new member to bring theirs. We expect that everyone be treated with 
+        kindness and respect. We do not ask our colleagues to be responsive to calls or emails beyond core working hours or on weekends. 
+        We take each other’s well-being and social situation into consideration when communicating or formulating expectations. 
+        We have a lab manager who helps negotiate between individual and group level needs. We recognise that emotions seep into and 
+        arise at work and actively encourage their expression, e.g. in regular check-in rounds at meetings but also in exchanges 
+        between group members. When misunderstandings or interpersonal problems emerge, we make an effort to resolve them through open 
+        talk and reflection. Our lab manager works hard to coordinate our workday to accommodate individual and group level needs.</p>
+      `,
+    },
+    {
+      title: 'III. WE FOSTER AUTONOMY AND SEEK TO PROVIDE OPPORTUNITY FOR PERSONAL AND PROFESSIONAL DEVELOPMENT',
+      description: `
+        <p class="mb-4 text-justify">In supervision relationships, we place great value in cultivating autonomy in our supervisees.
+         We ensure that everybody’s voice is heard no matter their position or seniority. Feedback and open discussion are an integral 
+         part of our work together. Peer support is an integral part of our approach to problem-solving and decision-making. 
+         We try to keep hierarchies as flat as possible and as steep as necessary to offer appropriate amounts of guidance and leadership.
+        We foster learning and experimentation in our group. All group members take turns assuming responsibility within the team 
+        (e.g. chairing or writing minutes for lab meetings, organising socials). We encourage further education (e.g., workshops, 
+        classes, summer schools) within and outside of the scope of our research, given that the day-to-day is taken care of. 
+        When obstacles arise, we attempt to find pragmatic solutions. There is room for ideas and flights of fancy, and we support 
+        each other in the evaluation and implementation.</p>
+      `,
+    },
+    {
+      title: 'IV. WE PRACTICE SCIENCE IN AN OPEN, COLLABORATIVE, AND RESOURCEFUL WAY',
+      description: `
+        <p class="mb-4 text-justify">We acknowledge that science is a joint effort rather than a competition. We do not want success 
+        on the back of other people’s failure. We build on the shoulders of other researchers as they build on ours to further science 
+        as a whole, and we believe that working collaboratively makes science more valuable and efficient. As such, 
+        we want to be transparent and accurate in the way we practice science and communicate our research findings. 
+        This includes publicly preregistering our new projects, presenting project proposals at conferences instead of only polished 
+        results, evaluating each other’s analysis steps in lab meetings, and visualizing data transparently. </p>
+        <p class="mb-4 text-justify"> We care for the volunteers that participate in our studies and value their contribution to science. 
+        The same holds for tax payers that make most of our research possible. To make most of the public funds made available to us, 
+        we try to be as resourceful as we can. This involves thorough project management within and across projects. 
+        We also comply as much as possible with good clinical practice to guarantee high ethical standards of our studies. 
+        By means of active science communication we aim to give back to the community in terms of knowledge and education. </p>
+        <p class="mb-4 text-justify"> We like to learn from our mistakes and aim to continuously improve the way we do science.</p>
+      `,
+    },
+  ]}
+/>
 
   <!-- Features3 Widget - Continuous Improvement ************** -->
 
