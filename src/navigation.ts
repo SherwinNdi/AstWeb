@@ -18,6 +18,10 @@ export const headerData = {
           href: getPermalink('/research/funding'),
         },
         {
+          text: 'Our Values',
+          href: getPermalink('/research/our-values'),
+        },
+        {
           text: 'Personal',
           href: getPermalink('/research/personal'),
         },

@@ -1,0 +1,195 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero3 from '~/components/widgets/Hero3.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Content from '~/components/widgets/Content.astro';
+
+import { headerData } from '~/navigation';
+
+const metadata = {
+  title: 'Our Values - The ManifestO\'BRAIN',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      showToggleTheme
+      isSticky
+    />
+  </Fragment>
+
+  <!-- Hero3 Widget ******************* -->
+
+  <Hero3
+    tagline="We have a shared vision at O'BRAIN!"
+    actions={[
+      { variant: 'primary', text: 'Join Our Team', href: '/contact' },
+      { variant: 'secondary', text: 'Learn About Research', href: '/research/projects' },
+    ]}
+  >
+    <Fragment slot="title">
+      Our <span class="text-accent dark:text-white highlight">Values</span>, Principles,
+      and Practices
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="block mb-4 text-justify">
+        At the O'BRAIN Lab, we share a set of values, principles, and practices that shape our work environment 
+        and guide how we communicate, provide supervision, and practice science.
+      </span>
+      <span class="block text-justify">
+        We feel that this is paramount, particularly considering that our lab is distributed across sites in 
+        Leipzig, Germany, and Helsinki, Finland. Our Values spells out explicitly what those values, 
+        principles, and practices are and how we strive to adhere to them. It is intended to help prospective 
+        and new members to get an idea of how we work and how we work together.
+      </span>
+    </Fragment>
+  </Hero3>
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Our Core Values"
+    subtitle="Four fundamental principles that guide everything we do at O'BRAIN Lab"
+    items={[
+      {
+        title: 'Value I',
+        description: 'We strive to offer an inclusive environment for a diverse set of people',
+      },
+      {
+        title: 'Value II',
+        description: 'We take the wellbeing of each of our team members seriously and communicate openly and respectfully',
+      },
+      {
+        title: 'Value III',
+        description: 'We foster autonomy and seek to provide opportunity for personal and professional development',
+      },
+      {
+        title: 'Value IV',
+        description: 'We practice science in an open, collaborative, and resourceful way',
+      },
+    ]}
+  />
+
+  <!-- Content Widget - Value IV Details **************** -->
+
+  <Content
+    id="value-iv"
+    isReversed
+    items={[
+      {
+        title: 'Collaborative Science',
+        description: 'We acknowledge that science is a joint effort rather than a competition. We do not want success on the back of other people\'s failure.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Transparency',
+        description: 'We want to be transparent and accurate in the way we practice science and communicate our research findings.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Open Research',
+        description: 'This includes publicly pre-registering our new projects, presenting project proposals at conferences instead of only polished results.',
+        icon: 'tabler:lock-open',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+      alt: 'Collaborative research environment',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Open, Collaborative, and Resourceful Science
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget - Responsibility **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Volunteer Care',
+        description: 'We care for the volunteers that participate in our studies and value their contribution to science.',
+        icon: 'tabler:heart-handshake',
+      },
+      {
+        title: 'Public Accountability',
+        description: 'The same holds for tax payers that make most of our research possible. To make most of the public funds made available to us, we try to be as resourceful as we can.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Ethical Standards',
+        description: 'We comply as much as possible with good clinical practice to guarantee high ethical standards of our studies.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Science Communication',
+        description: 'By means of active science communication we aim to give back to the community in terms of knowledge and education.',
+        icon: 'tabler:speakerphone',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Research responsibility',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Our Responsibility to Society
+      </h3>
+    </Fragment>
+  </Content>
+
+  <!-- Features3 Widget - Continuous Improvement ************** -->
+
+  <Features3
+    title="Continuous Improvement"
+    subtitle="We like to learn from our mistakes and aim to continuously improve the way we do science."
+    columns={3}
+    items={[
+      {
+        title: 'Peer Review',
+        description: 'Evaluating each other\'s analysis steps in lab meetings to ensure quality and accuracy.',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Transparent Data',
+        description: 'Visualizing data transparently to maintain scientific integrity and reproducibility.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Project Management',
+        description: 'Thorough project management within and across projects to maximize efficiency.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: 'Pre-registration',
+        description: 'Publicly pre-registering new projects to ensure transparency in research methodology.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Conference Engagement',
+        description: 'Presenting project proposals at conferences to gather feedback early in the research process.',
+        icon: 'tabler:presentation',
+      },
+      {
+        title: 'Learning Culture',
+        description: 'Creating an environment where mistakes are learning opportunities for growth.',
+        icon: 'tabler:school',
+      },
+    ]}
+  />
+
+</Layout>
