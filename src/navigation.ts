@@ -28,6 +28,10 @@ export const headerData = {
       ],
     },
     {
+      text: 'Publications',
+      href: getPermalink('/research/publications'),
+    },
+    {
       text: 'Pages',
       links: [
         {

@@ -1,0 +1,178 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+interface Publication {
+  title: string;
+  authors: string;
+  journal?: string;
+  year: number;
+  doi?: string;
+  url?: string;
+  type?: string;
+  citations?: number;
+  abstract?: string;
+  publisher?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  references_count?: number;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  publications?: Publication[];
+  orcidId?: string;
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  bg?: string;
+}
+
+const {
+  title = 'Publications',
+  subtitle = '',
+  tagline = '',
+  publications = [],
+  orcidId = '',
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Group publications by year (descending)
+const groupedByYear = publications.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, Publication[]>);
+
+// Sort years in descending order
+const sortedYears = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    classes={{
+      container: 'text-center mb-12 md:mb-16',
+      title: 'mb-4 text-3xl lg:text-4xl font-bold font-heading',
+      subtitle: 'mb-8 text-xl text-muted dark:text-slate-400',
+    }}
+  />
+
+  <div class="space-y-8">
+    {sortedYears.map((year, index) => (
+      <details class="publication-year-section group" open={index === 0}>
+        <summary class="cursor-pointer flex items-center justify-between py-3 border-b-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 transition-colors">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            {year}
+            <span class="ml-3 text-sm font-normal text-gray-500 dark:text-gray-400">
+              {groupedByYear[year].length} {groupedByYear[year].length === 1 ? 'publication' : 'publications'}
+            </span>
+          </h2>
+          <svg class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        
+        <div class="mt-6 space-y-6">
+          {groupedByYear[year].map((pub) => (
+            <article class="publication-item group/item">
+              <h3 class="text-base font-medium text-gray-900 dark:text-gray-100 mb-2 leading-snug">
+                {pub.url || pub.doi ? (
+                  <a 
+                    href={pub.url || `https://doi.org/${pub.doi}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {pub.title}
+                  </a>
+                ) : (
+                  pub.title
+                )}
+              </h3>
+              
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                {pub.authors}
+              </p>
+              
+              {(pub.journal || pub.publisher) && (
+                <p class="text-sm text-gray-500 dark:text-gray-500 italic">
+                  {pub.journal || pub.publisher}
+                  {pub.volume && ` ${pub.volume}`}
+                  {pub.issue && `(${pub.issue})`}
+                  {pub.pages && `, ${pub.pages}`}
+                  {pub.publisher && pub.journal && pub.publisher !== pub.journal && ` · ${pub.publisher}`}
+                </p>
+              )}
+              
+              <div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-500 mt-2">
+                {pub.citations !== undefined && pub.citations > 0 && (
+                  <span class="font-medium">📊 {pub.citations} citations</span>
+                )}
+                {pub.doi && (
+                  <a 
+                    href={`https://doi.org/${pub.doi}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    DOI
+                  </a>
+                )}
+                {pub.references_count !== undefined && pub.references_count > 0 && (
+                  <span>{pub.references_count} references</span>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </details>
+    ))}
+  </div>
+
+  {publications.length === 0 && (
+    <div class="text-center text-gray-500 dark:text-gray-400 py-12">
+      <p class="text-lg">No publications found.</p>
+      {orcidId && (
+        <p class="mt-4 text-sm">
+          View publications on <a href={`https://orcid.org/${orcidId}`} target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">ORCID</a>
+        </p>
+      )}
+    </div>
+  )}
+</WidgetWrapper>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary {
+    list-style: none;
+  }
+  
+  .publication-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(229 231 235 / 0.5);
+  }
+  
+  .dark .publication-item {
+    border-bottom-color: rgb(55 65 81 / 0.5);
+  }
+  
+  .publication-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+</style>

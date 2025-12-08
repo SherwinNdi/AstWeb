@@ -1,0 +1,53 @@
+# GitLab CI/CD Configuration for Auto-updating Publications
+
+stages:
+  - fetch
+  - build
+  - deploy
+
+# Fetch publications before building
+fetch_publications:
+  stage: fetch
+  image: python:3.11
+  before_script:
+    - pip install requests scholarly
+  script:
+    - python scripts/fetch_publications.py
+  artifacts:
+    paths:
+      - src/data/publications.json
+    expire_in: 1 day
+  only:
+    - schedules  # Only run on scheduled pipelines
+    - main       # Or when pushing to main
+
+# Build Astro site
+build_site:
+  stage: build
+  image: node:18
+  dependencies:
+    - fetch_publications
+  before_script:
+    - npm ci
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+  only:
+    - schedules
+    - main
+
+# Deploy to your hosting (example for GitLab Pages)
+pages:
+  stage: deploy
+  dependencies:
+    - build_site
+  script:
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

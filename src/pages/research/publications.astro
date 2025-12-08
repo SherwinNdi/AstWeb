@@ -1,0 +1,82 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Hero3 from '~/components/widgets/Hero3.astro';
+import PublicationMetrics from '~/components/widgets/PublicationMetrics.astro';
+import Publications from '~/components/widgets/Publications.astro';
+
+import { headerData } from '~/navigation';
+
+
+
+// Update ORCID ID in fetch_publications.py (replace 0000-0000-0000-0000 with your actual ORCID)
+// Test locally: python scripts/fetch_publications.py
+// Configure GitLab scheduled pipeline to run weekly/monthly 
+//
+// Import publications from JSON file (auto-updated by CI/CD)
+import publicationsData from '~/data/publications.json';
+
+const metadata = {
+  title: 'Publications - O\'BRAIN Lab',
+};
+
+// Extract publications array from JSON
+const publicationsList = publicationsData.publications || [];
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      showToggleTheme
+      isSticky
+    />
+  </Fragment>
+
+  <!-- Hero3 Widget ******************* -->
+
+  <Hero3
+    tagline="Our Research Output"
+    actions={[
+      { 
+        variant: 'primary', 
+        text: 'View on Google Scholar', 
+        href: 'https://scholar.google.de/citations?user=kGQy6cYAAAAJ',
+        target: '_blank'
+      },
+      { 
+        variant: 'secondary', 
+        text: 'View on ORCID', 
+        href: 'https://orcid.org/0000-0001-6184-8484',
+        target: '_blank'
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Our <span class="text-accent dark:text-white highlight">Publications</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="block text-justify">
+        Explore our latest research contributions to neuroscience, cognitive psychology, and brain development. 
+        Our work is published in leading peer-reviewed journals and presented at international conferences.
+      </span>
+    </Fragment>
+  </Hero3>
+
+  <!-- Publication Metrics Widget ******************* -->
+
+  <PublicationMetrics
+    publications={publicationsList}
+  />
+
+  <!-- Publications Widget ******************* -->
+
+  <Publications
+    title="Published Research"
+    subtitle="Complete list of our peer-reviewed publications organized by year"
+    publications={publicationsList}
+    orcidId="0000-0001-6184-8484"
+  />
+
+</Layout>

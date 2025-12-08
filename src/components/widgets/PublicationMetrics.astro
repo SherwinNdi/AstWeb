@@ -1,0 +1,156 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+interface Publication {
+  year: number;
+  citations?: number;
+  type?: string;
+}
+
+interface Props {
+  publications: Publication[];
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  bg?: string;
+}
+
+const {
+  publications = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Calculate metrics
+const totalPublications = publications.length;
+const totalCitations = publications.reduce((sum, pub) => sum + (pub.citations || 0), 0);
+const avgCitationsPerPaper = totalPublications > 0 ? (totalCitations / totalPublications).toFixed(1) : 0;
+
+// H-index calculation (simplified)
+const citationsSorted = publications
+  .map(p => p.citations || 0)
+  .sort((a, b) => b - a);
+let hIndex = 0;
+for (let i = 0; i < citationsSorted.length; i++) {
+  if (citationsSorted[i] >= i + 1) {
+    hIndex = i + 1;
+  } else {
+    break;
+  }
+}
+
+// Recent publications (last 5 years)
+const currentYear = new Date().getFullYear();
+const recentPublications = publications.filter(p => p.year >= currentYear - 5).length;
+
+// Most cited paper
+const mostCited = publications.reduce((max, pub) => 
+  (pub.citations || 0) > (max.citations || 0) ? pub : max
+, publications[0] || { citations: 0 });
+
+// Publication types distribution
+const typeDistribution = publications.reduce((acc, pub) => {
+  const type = pub.type || 'Other';
+  acc[type] = (acc[type] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+// Years active
+const years = publications.map(p => p.year).filter(y => y);
+const firstYear = Math.min(...years);
+const yearsActive = currentYear - firstYear + 1;
+const avgPublicationsPerYear = (totalPublications / yearsActive).toFixed(1);
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+    <!-- Total Publications -->
+    <div class="text-center">
+      <div class="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+        {totalPublications}
+      </div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        Publications
+      </div>
+    </div>
+
+    <!-- Total Citations -->
+    <div class="text-center">
+      <div class="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400 mb-2">
+        {totalCitations}
+      </div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        Total Citations
+      </div>
+    </div>
+
+    <!-- H-Index -->
+    <div class="text-center">
+      <div class="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+        {hIndex}
+      </div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        h-index
+      </div>
+    </div>
+
+    <!-- Average Citations -->
+    <div class="text-center">
+      <div class="text-4xl md:text-5xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+        {avgCitationsPerPaper}
+      </div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        Avg. Citations/Paper
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Metrics -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+    <!-- Recent Activity -->
+    <div class="text-center">
+      <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
+        {recentPublications}
+      </div>
+      <div class="text-xs text-gray-500 dark:text-gray-500">
+        Publications (Last 5 Years)
+      </div>
+    </div>
+
+    <!-- Years Active -->
+    <div class="text-center">
+      <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
+        {firstYear} - {currentYear}
+      </div>
+      <div class="text-xs text-gray-500 dark:text-gray-500">
+        Years Active ({avgPublicationsPerYear} papers/year)
+      </div>
+    </div>
+
+    <!-- Most Cited -->
+    <div class="text-center">
+      <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
+        {mostCited.citations || 0}
+      </div>
+      <div class="text-xs text-gray-500 dark:text-gray-500">
+        Most Cited Paper
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<style>
+  /* Optional: Add animation on scroll */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
