@@ -32,6 +32,19 @@ export const headerData = {
       href: getPermalink('/research/publications'),
     },
     {
+      text: 'About',
+      links: [
+        {
+          text: 'About Lab',
+          href: getPermalink('/about'),
+        },
+        {
+          text: 'Team Members',
+          href: getPermalink('/about/team'),
+        },
+      ],
+    },
+    {
       text: 'Pages',
       links: [
         {

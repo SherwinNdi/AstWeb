@@ -116,15 +116,6 @@ export interface Headline {
   classes?: Record<string, string>;
 }
 
-interface TeamMember {
-  name?: string;
-  job?: string;
-  image?: Image;
-  socials?: Array<Social>;
-  description?: string;
-  classes?: Record<string, string>;
-}
-
 interface Social {
   icon?: string;
   href?: string;
@@ -225,6 +216,22 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
 
 export interface Team extends Omit<Headline, 'classes'>, Widget {
   team?: Array<TeamMember>;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  title: string;
+  category: string;
+  yearJoined: number;
+  image: string | ImageMetadata;
+  webpage: string;
+  bio?: string;
+}
+
+export interface TeamMembers extends Omit<Headline, 'classes'>, Widget {
+  members?: Array<TeamMember>;
+  columns?: number;
 }
 
 export interface Stats extends Omit<Headline, 'classes'>, Widget {

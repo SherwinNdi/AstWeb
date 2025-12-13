@@ -12,7 +12,7 @@ import time
 # Configuration
 ORCID_ID = "0000-0001-6184-8484"  # Replace with your ORCID ID
 GOOGLE_SCHOLAR_ID = "kGQy6cYAAAAJ"  # Replace with your Google Scholar ID (from your profile URL)
-OUTPUT_FILE = "src/data/publications.json"
+OUTPUT_FILE = Path(__file__).parent.parent / "src" / "data" / "publications.json"  # Absolute path from script location
 USE_GOOGLE_SCHOLAR = False  # Set to False - Google Scholar blocks automated requests with CAPTCHA
 
 def fetch_google_scholar_publications(scholar_id):

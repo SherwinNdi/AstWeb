@@ -1,0 +1,84 @@
+{
+  "members": [
+    {
+      "id": "member-1",
+      "name": "Nadine Herzog",
+      "title": "PhD candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2018,
+      "image": "/team/nadine_herzog.png",
+      "webpage": "https://example.com/nadine-herzog",
+      "bio": "Neuroimaging and Computational Neuroscience"
+    },
+    {
+      "id": "member-2",
+      "name": "Linda Grasser",
+      "title": "MD Candidate",
+      "category": "MD Candidates",
+      "yearJoined": 2021,
+      "image": "/team/grasser-linda.png",
+      "webpage": "https://example.com/john-doe",
+      "bio": "Researching ..."
+    },
+    {
+      "id": "member-3",
+      "name": "Emily Johnson",
+      "title": "Postdoctoral Researcher",
+      "category": "PostDocs",
+      "yearJoined": 2020,
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/emily-johnson",
+      "bio": "Specialist in cognitive neuroscience"
+    },
+    {
+      "id": "member-4",
+      "name": "Michael Chen",
+      "title": "MD Candidate",
+      "category": "MD Candidates",
+      "yearJoined": 2022,
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/michael-chen",
+      "bio": "Clinical research in neuropsychiatry"
+    },
+    {
+      "id": "member-5",
+      "name": "Sarah Williams",
+      "title": "Research Assistant",
+      "category": "Research Assistants",
+      "yearJoined": 2023,
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/sarah-williams",
+      "bio": "Supporting experimental design and data collection"
+    },
+    {
+      "id": "member-6",
+      "name": "David Martinez",
+      "title": "MSc Student",
+      "category": "MSc Students",
+      "yearJoined": 2024,
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/david-martinez",
+      "bio": "Master's thesis on neural networks"
+    },
+    {
+      "id": "member-7",
+      "name": "Lisa Anderson",
+      "title": "PhD Candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2022,
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/lisa-anderson",
+      "bio": "Investigating brain connectivity patterns"
+    },
+    {
+      "id": "member-8",
+      "name": "Robert Taylor",
+      "title": "Research Assistant",
+      "category": "Research Assistants",
+      "yearJoined": 2023,
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      "webpage": "https://example.com/robert-taylor",
+      "bio": "Laboratory management and coordination"
+    }
+  ]
+}

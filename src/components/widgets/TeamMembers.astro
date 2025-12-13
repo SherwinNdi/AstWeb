@@ -1,0 +1,138 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { TeamMembers as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  members = [],
+  columns = 4,
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Research Assistants', 'MSc Students'];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+  
+  <!-- Filter Buttons -->
+  <div class="flex flex-wrap justify-center gap-3 mb-8">
+    {categories.map((category) => (
+      <button
+        class="filter-btn px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 font-medium"
+        data-category={category}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+
+  <!-- Team Members Grid -->
+  <div 
+    class={`grid gap-6 ${
+      columns === 4
+        ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+        : columns === 3
+          ? 'lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2'
+          : 'lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'
+    }`}
+  >
+    {members.map((member) => (
+      <a
+        href={member.webpage}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="team-member group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+        data-category={member.category}
+      >
+        <!-- Member Image -->
+        <div class="relative aspect-square overflow-hidden">
+          <img
+            src={typeof member.image === 'string' ? member.image : member.image?.src}
+            alt={member.name}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          
+          <!-- Overlay that appears on hover -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <h3 class="text-xl font-bold mb-1">{member.name}</h3>
+              <p class="text-sm text-gray-200 mb-1">{member.title}</p>
+              <p class="text-sm text-gray-300">Joined: {member.yearJoined}</p>
+              {member.bio && (
+                <p class="text-xs text-gray-400 mt-2 line-clamp-2">{member.bio}</p>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Basic Info (always visible) -->
+        <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 p-3 group-hover:opacity-0 transition-opacity duration-300">
+          <h3 class="font-semibold text-lg text-gray-900 dark:text-white truncate">{member.name}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 truncate">{member.title}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</WidgetWrapper>
+
+<script>
+  // Filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const teamMembers = document.querySelectorAll<HTMLElement>('.team-member');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        
+        // Update active button state
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white');
+          btn.classList.add('text-primary');
+        });
+        button.classList.add('bg-primary', 'text-white');
+        button.classList.remove('text-primary');
+
+        // Filter team members
+        teamMembers.forEach(member => {
+          const memberCategory = member.getAttribute('data-category');
+          
+          if (category === 'All' || memberCategory === category) {
+            member.style.display = 'block';
+            // Add fade-in animation
+            member.style.animation = 'fadeIn 0.5s ease-in';
+          } else {
+            member.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Set "All" as active by default
+    const allButton = document.querySelector('.filter-btn[data-category="All"]');
+    if (allButton) {
+      allButton.classList.add('bg-primary', 'text-white');
+      allButton.classList.remove('text-primary');
+    }
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
