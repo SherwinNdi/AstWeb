@@ -1,7 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import TeamMembers from '~/components/widgets/TeamMembers.astro';
-import Hero from '~/components/widgets/Hero.astro';
 import teamData from '~/data/team.json';
 import type { TeamMember } from '~/types';
 
@@ -12,25 +11,18 @@ const metadata = {
 
 // Type assertion to handle JSON import
 const members = teamData.members as unknown as TeamMember[];
+const alumni = teamData.alumni as unknown as TeamMember[];
+const principalInvestigator = teamData.principalInvestigator as unknown as TeamMember;
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Section -->
-  <Hero
-    tagline="Our Team"
-    title="Meet Our Research Team"
-  >
-    <Fragment slot="subtitle">
-      Our diverse team of researchers, clinicians, and students work together to advance our understanding 
-      of neuroscience and human behavior. Each member brings unique expertise and passion to our collaborative environment.
-    </Fragment>
-  </Hero>
-
   <!-- Team Members Section -->
   <TeamMembers
     title="Team Members"
     subtitle="Explore our team by category or browse all members"
+    principalInvestigator={principalInvestigator}
     members={members}
+    alumni={alumni}
     columns={4}
   />
 </Layout>

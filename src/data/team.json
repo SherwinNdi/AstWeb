@@ -1,4 +1,17 @@
 {
+  "principalInvestigator": {
+    "id": "pi-1",
+    "name": "Prof. Annette Horstmann",
+    "title": "Principal Investigator",
+    "category": "Principal Investigator",
+    "yearJoined": 2015,
+    "image": "/team/horstmann-annette.png",
+    "webpage": "https://example.com/annette-horstmann",
+    "bio": "Leading research in computational neuroscience, obesity, and decision-making. Exploring the neural mechanisms underlying eating behavior and metabolic health.",
+    "email": "annette.horstmann@example.com",
+    "education": "PhD in Neuroscience",
+    "research": "Computational neuroscience, obesity, decision-making, neuroimaging"
+  },
   "members": [
     {
       "id": "member-1",
@@ -22,63 +35,148 @@
     },
     {
       "id": "member-3",
-      "name": "Emily Johnson",
-      "title": "Postdoctoral Researcher",
-      "category": "PostDocs",
-      "yearJoined": 2020,
-      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/emily-johnson",
-      "bio": "Specialist in cognitive neuroscience"
+      "name": "Kathleen Wiencke",
+      "title": "PhD Candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2014,
+      "image": "/team/wiencke-kathleen.png",
+      "webpage": "https://example.com/kathleen-wiencke",
+      "bio": "Computational modelling of dopamine transmission and cognition in reinforcement learning."
     },
     {
       "id": "member-4",
-      "name": "Michael Chen",
-      "title": "MD Candidate",
-      "category": "MD Candidates",
-      "yearJoined": 2022,
-      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/michael-chen",
-      "bio": "Clinical research in neuropsychiatry"
+      "name": "Arsene Kanyamibwa",
+      "title": "PhD Candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2021,
+      "image": "/team/kanyamibwa-arsene.png",
+      "webpage": "https://example.com/arsene-kanyamibwa",
+      "bio": "Dopamine, Diet and Obesity"
     },
     {
       "id": "member-5",
-      "name": "Sarah Williams",
-      "title": "Research Assistant",
-      "category": "Research Assistants",
-      "yearJoined": 2023,
-      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/sarah-williams",
-      "bio": "Supporting experimental design and data collection"
+      "name": "Manon Chédeville",
+      "title": "PhD Candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2024,
+      "image": "/team/chedeville-manon.png",
+      "webpage": "https://example.com/manon-chedeville",
+      "bio": "Cancer-Related Cognitive Impairments and their connections to obesity"
     },
     {
       "id": "member-6",
-      "name": "David Martinez",
-      "title": "MSc Student",
-      "category": "MSc Students",
-      "yearJoined": 2024,
-      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/david-martinez",
-      "bio": "Master's thesis on neural networks"
+      "name": "Sherwin Nedaei Janbesaraei",
+      "title": "PhD Candidate",
+      "category": "PhD Candidates",
+      "yearJoined": 2025,
+      "image": "/team/nedaei-janbesaraei-sherwin.png",
+      "webpage": "https://example.com/sherwin-nedaei-janbesaraei",
+      "bio": "Computational modeling of Obesity and Eating Behaviors"
     },
     {
       "id": "member-7",
-      "name": "Lisa Anderson",
-      "title": "PhD Candidate",
-      "category": "PhD Candidates",
-      "yearJoined": 2022,
-      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/lisa-anderson",
-      "bio": "Investigating brain connectivity patterns"
+      "name": "Jonathan Ray",
+      "title": "Msc Student",
+      "category": "MSc Students",
+      "yearJoined": 2025,
+      "image": "/team/ray-jonathan.png",
+      "webpage": "https://example.com/jonathan-ray",
+      "bio": "......"
     },
     {
       "id": "member-8",
-      "name": "Robert Taylor",
+      "name": "Anna Krasikova",
+      "title": "Msc Student",
+      "category": "MSc Students",
+      "yearJoined": 2025,
+      "image": "/team/krasikova-anna.png",
+      "webpage": "https://example.com/anna-krasikova",
+      "bio": "......"
+    },
+    {
+      "id": "member-8",
+      "name": "Nooa Myllykoski",
       "title": "Research Assistant",
       "category": "Research Assistants",
+      "yearJoined": 2025,
+      "image": "/team/myllykoski-nooa.png",
+      "webpage": "https://example.com/nooa-myllykoski",
+      "bio": "......"
+    }
+  ],
+  "alumni": [
+    {
+      "id": "alumni-1",
+      "name": "Hendrik Hartmann",
+      "title": "PostDoc Researcher",
       "yearJoined": 2023,
-      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-      "webpage": "https://example.com/robert-taylor",
-      "bio": "Laboratory management and coordination"
+      "yearLeft": 2024,
+      "image": "/team/alumni/hartmann-hendrik.png",
+      "webpage": "https://example.com/hendrik-hartmann"
+    },
+    {
+      "id": "alumni-2",
+      "name": "Daniel Fängström",
+      "title": "PhD Candidate",
+      "yearJoined": 2023,
+      "yearLeft": 2024,
+      "image": "/team/alumni/fangstrom-daniel.png",
+      "webpage": "https://www.linkedin.com/in/daniel-f%C3%A4ngstr%C3%B6m-529195125/?originalSubdomain=fi"
+    },
+    {
+      "id": "alumni-3",
+      "name": "Maria Waltmann",
+      "title": "PostDoc Researcher",
+      "yearJoined": 2021,
+      "yearLeft": 2023,
+      "image": "/team/alumni/waltmann-maria.png",
+      "webpage": "https://example.com/maria-waltmann"
+    },
+    {
+      "id": "alumni-4",
+      "name": "Eva Burmeister",
+      "title": "Research Assistant",
+      "yearJoined": 2019,
+      "yearLeft": 2021,
+      "image": "/team/alumni/burmeister-eva.png",
+      "webpage": "https://example.com/nora-mehl"
+    },
+    
+    {
+      "id": "alumni-5",
+      "name": "Franziska Albrecht",
+      "title": "Research Assistant",
+      "yearJoined": 2013,
+      "yearLeft": 2016,
+      "image": "/team/alumni/albrecht-franziska.png",
+      "webpage": "https://scholar.google.com/citations?user=1_suiu0AAAAJ&hl=en"
+    },
+    {
+      "id": "alumni-6",
+      "name": "Agata Barcik",
+      "title": "Research Assistant",
+      "yearJoined": 2019,
+      "yearLeft": 2023,
+      "image": "/team/alumni/barcik-agata.png",
+      "webpage": "https://www.linkedin.com/in/bagatab/"
+    },
+    {
+      "id": "alumni-7",
+      "name": "Nora Breuer",
+      "title": "MD Candidate",
+      "yearJoined": 2017,
+      "yearLeft": 2022,
+      "image": "/team/alumni/breuer-nora.png",
+      "webpage": "https://www.researchgate.net/profile/Nora-Breuer"
+    },
+    {
+      "id": "alumni-8",
+      "name": "Eva Burmeister",
+      "title": "Research Assistant",
+      "yearJoined": 2019,
+      "yearLeft": 2021,
+      "image": "/team/alumni/burmeister-eva.png",
+      "webpage": "https://example.com/nora-mehl"
     }
   ]
 }

@@ -42,6 +42,10 @@ export const headerData = {
           text: 'Team Members',
           href: getPermalink('/about/team'),
         },
+        {
+          text: 'Contact',
+          href: getPermalink('/contact'),
+        },
       ],
     },
     {
@@ -62,10 +66,6 @@ export const headerData = {
         {
           text: 'About us',
           href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
-          href: getPermalink('/contact'),
         },
         {
           text: 'Terms',

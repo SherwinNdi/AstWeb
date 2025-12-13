@@ -1,79 +1,140 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact - O\'BRAIN Lab',
+  description: 'Get in touch with the O\'BRAIN Lab in Helsinki, Finland',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+  <!-- Contact Section with Golden Ratio Layout -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Page Title -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Get in touch with our team in Helsinki, Finland
+        </p>
+      </div>
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+      <!-- Main Content - Golden Ratio Split -->
+      <div class="grid md:grid-cols-[38.2fr_61.8fr] gap-12 mb-20">
+        
+        <!-- Left Column - Contact Information (38.2%) -->
+        <div class="space-y-8">
+          
+          <!-- Lab Location -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-800">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Lab Location in Helsinki</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                  In Helsinki the O'BRAIN Lab has its headquarters at the Department of Psychology and Logopedics on the Meilahti Campus.
+                </p>
+                <div class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                  <p class="font-semibold">Behavioural & Brain Sciences</p>
+                  <p>Faculty of Medicine</p>
+                  <p>Department of Psychology and Logopedics</p>
+                  <p>Haartmaninkatu 3</p>
+                  <p>00290 Helsinki</p>
+                  <p>Finland</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+          <!-- Questions & Comments -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-800">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Questions & Comments</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                  For questions and comments of any kind, please don't hesitate to contact our lab coordinator:
+                </p>
+                <div class="text-sm">
+                  <p class="font-semibold text-gray-900 dark:text-white">Arsene Kanyamibwa</p>
+                  <a href="mailto:obrainlab@gmail.com" class="text-primary hover:underline">
+                    obrainlab@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <!-- Features2 Widget ************** -->
+          <!-- Participate in Studies -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-800">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Participate in Studies</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                  If you would like to participate in one of our studies in Helsinki, please visit our participation page for more information.
+                </p>
+                <a href="/research/personal" class="inline-flex items-center text-primary hover:underline text-sm font-medium">
+                  Learn More →
+                </a>
+              </div>
+            </div>
+          </div>
 
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+          <!-- The Team -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md p-6 border border-gray-200 dark:border-gray-800">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">The Team</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">
+                  Please see our member section if you want to contact a specific person.
+                </p>
+                <a href="/about/team" class="inline-flex items-center text-primary hover:underline text-sm font-medium">
+                  View Team Members →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Google Map (61.8%) -->
+        <div class="h-full min-h-[600px]">
+          <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-800 h-full">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.0586988815895!2d24.918969616093023!3d60.18873198196641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468df5ddb3d1e32d%3A0x7c3ba1c8b9b9c0a0!2sHaartmaninkatu%203%2C%2000290%20Helsinki%2C%20Finland!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full"
+              title="O'BRAIN Lab Location"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </Layout>

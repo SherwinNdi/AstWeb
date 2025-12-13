@@ -8,6 +8,8 @@ const {
   subtitle = await Astro.slots.render('subtitle'),
   tagline = await Astro.slots.render('tagline'),
   members = [],
+  alumni = [],
+  principalInvestigator,
   columns = 4,
   id,
   isDark = false,
@@ -21,11 +23,68 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
   
-  <!-- Filter Buttons -->
-  <div class="flex flex-wrap justify-center gap-3 mb-8">
+  <!-- Principal Investigator Section -->
+  {principalInvestigator && (
+    <div class="mb-16 max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row gap-8 items-start bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-8 md:p-12">
+        <!-- PI Image - Golden Ratio Width (~38.2%) -->
+        <div class="w-full md:w-[38.2%] flex-shrink-0">
+          <a href={principalInvestigator.webpage} target="_blank" rel="noopener noreferrer" class="block group">
+            <div class="relative overflow-hidden rounded-2xl shadow-md group-hover:shadow-xl transition-shadow duration-300">
+              <img
+                src={typeof principalInvestigator.image === 'string' ? principalInvestigator.image : principalInvestigator.image?.src}
+                alt={principalInvestigator.name}
+                class="w-full aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+          </a>
+        </div>
+        
+        <!-- PI Info - Golden Ratio Width (~61.8%) -->
+        <div class="w-full md:w-[61.8%] flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            <a href={principalInvestigator.webpage} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+              {principalInvestigator.name}
+            </a>
+          </h2>
+          <p class="text-lg text-primary font-semibold mb-4">{principalInvestigator.title}</p>
+          <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{principalInvestigator.bio}</p>
+          
+          {principalInvestigator.research && (
+            <div class="mb-3">
+              <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-2">Research Interests</h3>
+              <p class="text-gray-700 dark:text-gray-300 text-sm">{principalInvestigator.research}</p>
+            </div>
+          )}
+          
+          <div class="flex flex-wrap gap-3 mt-4">
+            {principalInvestigator.email && (
+              <a 
+                href={`mailto:${principalInvestigator.email}`}
+                class="inline-flex items-center px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium"
+              >
+                Contact
+              </a>
+            )}
+            <a 
+              href={principalInvestigator.webpage}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all duration-300 text-sm font-medium"
+            >
+              View Profile →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+  
+  <!-- Filter Buttons - Minimal Design with Rounded Rectangles -->
+  <div class="flex flex-wrap justify-center gap-3 mb-12">
     {categories.map((category) => (
       <button
-        class="filter-btn px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 font-medium"
+        class="filter-btn px-6 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-primary hover:text-primary transition-all duration-300 font-medium text-sm"
         data-category={category}
       >
         {category}
@@ -33,9 +92,9 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
     ))}
   </div>
 
-  <!-- Team Members Grid -->
+  <!-- Team Members Grid - Following Golden Ratio Spacing -->
   <div 
-    class={`grid gap-6 ${
+    class={`grid gap-8 ${
       columns === 4
         ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
         : columns === 3
@@ -48,11 +107,11 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
         href={member.webpage}
         target="_blank"
         rel="noopener noreferrer"
-        class="team-member group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+        class="team-member group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
         data-category={member.category}
       >
         <!-- Member Image -->
-        <div class="relative aspect-square overflow-hidden">
+        <div class="relative aspect-[3/4] overflow-hidden">
           <img
             src={typeof member.image === 'string' ? member.image : member.image?.src}
             alt={member.name}
@@ -60,48 +119,138 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
           />
           
           <!-- Overlay that appears on hover -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <h3 class="text-xl font-bold mb-1">{member.name}</h3>
-              <p class="text-sm text-gray-200 mb-1">{member.title}</p>
-              <p class="text-sm text-gray-300">Joined: {member.yearJoined}</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h3 class="text-xl font-bold mb-1.5 text-white">{member.name}</h3>
+              <p class="text-sm text-gray-200 mb-1.5">{member.title}</p>
+              <p class="text-sm text-gray-300 mb-2.5">Joined: {member.yearJoined}</p>
               {member.bio && (
-                <p class="text-xs text-gray-400 mt-2 line-clamp-2">{member.bio}</p>
+                <p class="text-xs text-gray-400 mt-2 line-clamp-3 leading-relaxed">{member.bio}</p>
               )}
             </div>
           </div>
         </div>
         
-        <!-- Basic Info (always visible) -->
-        <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 p-3 group-hover:opacity-0 transition-opacity duration-300">
-          <h3 class="font-semibold text-lg text-gray-900 dark:text-white truncate">{member.name}</h3>
+        <!-- Basic Info (always visible) - Minimal Design -->
+        <div class="absolute bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm p-4 group-hover:opacity-0 transition-opacity duration-300 border-t border-gray-200 dark:border-gray-700">
+          <h3 class="font-semibold text-base text-gray-900 dark:text-white truncate">{member.name}</h3>
           <p class="text-sm text-gray-600 dark:text-gray-400 truncate">{member.title}</p>
         </div>
       </a>
     ))}
+    
+    <!-- Join Our Team Card -->
+    <a
+      href="/contact"
+      class="team-member group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary"
+      data-category="All"
+    >
+      <div class="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 flex flex-col items-center justify-center p-8 text-center">
+        <!-- Question Mark Icon -->
+        <div class="mb-4 text-gray-300 dark:text-gray-600 group-hover:text-primary transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        
+        <!-- Text Content -->
+        <h3 class="text-2xl font-bold mb-3 text-gray-700 dark:text-gray-300 group-hover:text-primary transition-colors duration-300">
+          This can be you?
+        </h3>
+        <p class="text-base text-gray-600 dark:text-gray-400 font-medium mb-4">
+          Join our team
+        </p>
+        <p class="text-sm text-gray-500 dark:text-gray-500">
+          We're always looking for talented researchers
+        </p>
+        
+        <!-- Arrow Icon -->
+        <div class="mt-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </div>
+      </div>
+    </a>
   </div>
+
+  <!-- Alumni Section -->
+  {alumni && alumni.length > 0 && (
+    <div class="mt-20">
+      <!-- Alumni Title -->
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">Alumni</h2>
+        <p class="text-base text-gray-600 dark:text-gray-400">Former members who contributed to our research</p>
+      </div>
+
+      <!-- Alumni Grid - Smaller cards, more columns following golden ratio -->
+      <div class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        {alumni.map((alum) => (
+          <a
+            href={alum.webpage}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="alumni-member group relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300"
+          >
+            <!-- Alumni Image - Smaller aspect ratio -->
+            <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-slate-800">
+              <img
+                src={typeof alum.image === 'string' ? alum.image : alum.image?.src}
+                alt={alum.name}
+                class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 saturate-50 brightness-95 group-hover:saturate-100 group-hover:brightness-100"
+              />
+              
+              <!-- Simple overlay on hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute bottom-0 left-0 right-0 p-3">
+                  <p class="text-xs text-gray-300">
+                    {alum.yearJoined} - {alum.yearLeft}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Alumni Info - Minimal -->
+            <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm p-3 border-t border-gray-200 dark:border-gray-700">
+              <h3 class="font-semibold text-sm text-gray-900 dark:text-white truncate">{alum.name}</h3>
+              <p class="text-xs text-gray-600 dark:text-gray-400 truncate">{alum.title}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 </WidgetWrapper>
 
 <script>
   // Filter functionality
-  document.addEventListener('DOMContentLoaded', () => {
+  function initializeFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const teamMembers = document.querySelectorAll<HTMLElement>('.team-member');
 
+    // Remove any existing event listeners by cloning buttons
     filterButtons.forEach(button => {
+      const newButton = button.cloneNode(true);
+      button.parentNode?.replaceChild(newButton, button);
+    });
+
+    // Get the updated button references
+    const updatedFilterButtons = document.querySelectorAll('.filter-btn');
+    const updatedTeamMembers = document.querySelectorAll<HTMLElement>('.team-member');
+
+    updatedFilterButtons.forEach(button => {
       button.addEventListener('click', () => {
         const category = button.getAttribute('data-category');
         
-        // Update active button state
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-primary', 'text-white');
-          btn.classList.add('text-primary');
+        // Update active button state - Minimal Design
+        updatedFilterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white', 'border-primary');
+          btn.classList.add('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
         });
-        button.classList.add('bg-primary', 'text-white');
-        button.classList.remove('text-primary');
+        button.classList.add('bg-primary', 'text-white', 'border-primary');
+        button.classList.remove('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
 
         // Filter team members
-        teamMembers.forEach(member => {
+        updatedTeamMembers.forEach(member => {
           const memberCategory = member.getAttribute('data-category');
           
           if (category === 'All' || memberCategory === category) {
@@ -118,10 +267,16 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
     // Set "All" as active by default
     const allButton = document.querySelector('.filter-btn[data-category="All"]');
     if (allButton) {
-      allButton.classList.add('bg-primary', 'text-white');
-      allButton.classList.remove('text-primary');
+      allButton.classList.add('bg-primary', 'text-white', 'border-primary');
+      allButton.classList.remove('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
     }
-  });
+  }
+
+  // Initialize on first load
+  document.addEventListener('DOMContentLoaded', initializeFilters);
+  
+  // Re-initialize on navigation (for Astro view transitions)
+  document.addEventListener('astro:page-load', initializeFilters);
 </script>
 
 <style>

@@ -222,15 +222,21 @@ export interface TeamMember {
   id: string;
   name: string;
   title: string;
-  category: string;
+  category?: string;
   yearJoined: number;
+  yearLeft?: number;
   image: string | ImageMetadata;
   webpage: string;
   bio?: string;
+  email?: string;
+  education?: string;
+  research?: string;
 }
 
 export interface TeamMembers extends Omit<Headline, 'classes'>, Widget {
   members?: Array<TeamMember>;
+  alumni?: Array<TeamMember>;
+  principalInvestigator?: TeamMember;
   columns?: number;
 }
 
