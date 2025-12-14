@@ -1,0 +1,94 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '~/layouts/PageLayout.astro';
+import PersonalPage from '~/components/PersonalPage.astro';
+import teamData from '~/data/team.json';
+import publicationsData from '~/data/publications.json';
+import { fetchPosts } from '~/utils/blog';
+
+export const getStaticPaths = (async () => {
+  // Exclude these members
+  const excludedNames = ['Nadine Herzog', 'Jonathan Ray', 'Linda Grasser', 'Kathleen Wiencke'];
+  
+  // Get all current members (PI + members, exclude alumni)
+  const allMembers = [teamData.principalInvestigator, ...teamData.members];
+  
+  const paths = allMembers
+    .filter(member => !excludedNames.includes(member.name))
+    .map(member => {
+      const slug = member.name
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, '-');
+      
+      return {
+        params: { slug },
+        props: { member }
+      };
+    });
+  
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { member } = Astro.props;
+
+interface Publication {
+  title: string;
+  authors: string;
+  journal: string;
+  year: number;
+  doi?: string | null;
+  url?: string;
+  type?: string;
+  citations?: number;
+  abstract?: string;
+  publisher?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  references_count?: number;
+}
+
+// Filter publications by author name
+const memberPublications = publicationsData.publications.filter((pub: Publication) => {
+  const authors = pub.authors.toLowerCase();
+  const nameParts = member.name.toLowerCase().split(' ');
+  const lastName = nameParts[nameParts.length - 1];
+  return authors.includes(lastName);
+});
+
+// Filter blog posts mentioning this person
+const allPosts = await fetchPosts();
+const memberPosts = allPosts.filter(post => {
+  const content = post.content?.toLowerCase() || '';
+  const title = post.title.toLowerCase();
+  const excerpt = post.excerpt?.toLowerCase() || '';
+  const name = member.name.toLowerCase();
+  
+  return content.includes(name) || title.includes(name) || excerpt.includes(name);
+}).slice(0, 6).map(post => ({
+  title: post.title,
+  publishDate: post.publishDate,
+  excerpt: post.excerpt || '',
+  permalink: post.permalink
+})); // Limit to 6 most recent posts
+
+const metadata = {
+  title: `${member.name} - Personal Page`,
+  description: member.bio,
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <PersonalPage 
+    person={{
+      ...member,
+      publications: memberPublications
+    }}
+    blogPosts={memberPosts}
+  />
+</Layout>

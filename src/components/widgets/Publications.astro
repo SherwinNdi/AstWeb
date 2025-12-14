@@ -7,8 +7,8 @@ interface Publication {
   authors: string;
   journal?: string;
   year: number;
-  doi?: string;
-  url?: string;
+  doi?: string | null;
+  url?: string | null;
   type?: string;
   citations?: number;
   abstract?: string;

@@ -21,10 +21,6 @@ export const headerData = {
           text: 'Our Values',
           href: getPermalink('/research/our-values'),
         },
-        {
-          text: 'Personal',
-          href: getPermalink('/research/personal'),
-        },
       ],
     },
     {

@@ -1,0 +1,396 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Publication {
+  title: string;
+  authors: string;
+  journal: string;
+  year: number;
+  doi?: string | null;
+  url?: string;
+  type?: string;
+  citations?: number;
+  abstract?: string;
+  publisher?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  references_count?: number;
+}
+
+export interface Props {
+  person: {
+    name: string;
+    title: string;
+    image: string;
+    bio: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    orcid?: string;
+    universityLink?: string;
+    googleScholar?: string;
+    github?: string;
+    osf?: string;
+    cvUrl?: string;
+    publications?: Publication[];
+  };
+  blogPosts?: Array<{
+    title: string;
+    publishDate: Date;
+    excerpt?: string;
+    permalink: string;
+  }>;
+}
+
+const { person, blogPosts = [] } = Astro.props;
+
+// Filter out empty contact links
+const contactLinks = [
+  { icon: 'tabler:mail', label: 'Email', href: person.email ? `mailto:${person.email}` : '', value: person.email },
+  { icon: 'tabler:phone', label: 'Phone', href: person.phone ? `tel:${person.phone}` : '', value: person.phone },
+  { icon: 'tabler:map-pin', label: 'Address', href: '', value: person.address },
+  { icon: 'tabler:id-badge', label: 'ORCID', href: person.orcid ? `https://orcid.org/${person.orcid}` : '', value: person.orcid },
+  { icon: 'tabler:school', label: 'University', href: person.universityLink || '', value: person.universityLink },
+  { icon: 'tabler:book', label: 'Google Scholar', href: person.googleScholar || '', value: person.googleScholar },
+  { icon: 'tabler:brand-github', label: 'GitHub', href: person.github || '', value: person.github },
+  { icon: 'tabler:database', label: 'OSF', href: person.osf || '', value: person.osf },
+].filter(link => link.value);
+
+// Group publications by type
+const publicationsByType = person.publications?.reduce((acc: Record<string, Publication[]>, pub: Publication) => {
+  const type = pub.type || 'Publications';
+  if (!acc[type]) acc[type] = [];
+  acc[type].push(pub);
+  return acc;
+}, {});
+
+// Get unique years from all publications
+const allYears = Array.from(
+  new Set(person.publications?.map(pub => pub.year) || [])
+).sort((a, b) => b - a); // Sort descending (newest first)
+---
+
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+  <!-- Hero Section with Elegant Layout -->
+  <section class="mb-20">
+    <!-- Header: Name and Title -->
+    <div class="mb-12 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+        {person.name}
+      </h1>
+      <p class="text-2xl text-primary dark:text-blue-400 font-light tracking-wide">
+        {person.title}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+      <!-- Left Column: Image (1/3) -->
+      <div class="lg:col-span-1">
+        <div class="relative overflow-hidden rounded-2xl shadow-2xl mb-8">
+          <img
+            src={person.image}
+            alt={person.name}
+            class="w-full aspect-[3/4] object-cover"
+            width="400"
+            height="533"
+            loading="eager"
+          />
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 rounded-xl p-6 space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-300 dark:border-gray-700">
+            Contact Information
+          </h3>
+          <div class="space-y-3">
+            {contactLinks.map(link => (
+              <div class="flex items-start gap-3">
+                <Icon name={link.icon} class="w-5 h-5 mt-0.5 text-primary dark:text-blue-400 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
+                    {link.label}
+                  </div>
+                  {link.href ? (
+                    <a 
+                      href={link.href} 
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      class="text-sm text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 break-words transition-colors"
+                    >
+                      {link.label === 'Email' || link.label === 'Phone' ? link.value : 'Visit'}
+                    </a>
+                  ) : (
+                    <span class="text-sm text-gray-700 dark:text-gray-300 break-words">{link.value}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {person.cvUrl && (
+            <a
+              href={person.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 flex items-center justify-center w-full px-5 py-3 bg-primary hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
+            >
+              <Icon name="tabler:download" class="w-5 h-5 mr-2" />
+              Download CV
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- Right Column: Bio (2/3) -->
+      <div class="lg:col-span-2">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b-2 border-gray-200 dark:border-gray-700">
+            About
+          </h2>
+          <div class="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4">
+            {person.bio.split('. ').map((sentence: string, index: number) => {
+              if (sentence.trim()) {
+                return <p class="mb-4">{sentence.trim() + (index < person.bio.split('. ').length - 1 ? '.' : '')}</p>
+              }
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  {person.publications && person.publications.length > 0 && (
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
+        Publications
+      </h2>
+      
+      <!-- Fixed-height scrollable container -->
+      <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden">
+        <!-- Year filter bar at the top -->
+        <div class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-slate-900 p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Filter by Year</h4>
+            <button 
+              id="reset-filter"
+              class="text-xs px-3 py-1 rounded-md bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200"
+            >
+              Show All
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {allYears.map(year => (
+              <button 
+                class="year-filter px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-primary hover:text-primary dark:hover:text-blue-400 transition-all duration-200 text-sm font-medium"
+                data-year={year}
+              >
+                {year}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Scrollable content area -->
+        <div id="publications-container" class="h-[600px] overflow-y-auto p-6 scroll-smooth">
+          {publicationsByType && Object.entries(publicationsByType).map(([type, pubs]: [string, Publication[]]) => (
+            <div class="publication-type-section mb-10" data-type={type}>
+              <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 sticky top-0 bg-white dark:bg-slate-800 py-2 z-10">
+                {type}
+              </h3>
+              <div class="space-y-6">
+                {pubs.map((pub: Publication) => (
+                  <article class="publication-item bg-gray-50 dark:bg-slate-700/50 rounded-lg p-5 hover:shadow-md transition-shadow duration-200" data-year={pub.year}>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 leading-snug">
+                      {pub.url ? (
+                        <a 
+                          href={pub.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          class="hover:text-primary dark:hover:text-blue-400 transition-colors"
+                        >
+                          {pub.title}
+                        </a>
+                      ) : (
+                        pub.title
+                      )}
+                    </h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      {pub.authors}
+                    </p>
+                    <div class="flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                      <span class="font-medium">{pub.journal}</span>
+                      <span>•</span>
+                      <span class="publication-year font-semibold">{pub.year}</span>
+                      {pub.doi && (
+                        <>
+                          <span>•</span>
+                          <a 
+                            href={`https://doi.org/${pub.doi}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-primary dark:text-blue-400 hover:underline"
+                          >
+                            DOI
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Blog Posts Featuring This Person -->
+  {blogPosts && blogPosts.length > 0 && (
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
+        News & Updates
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {blogPosts.map((post) => (
+          <article class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+            <time class="text-sm text-gray-500 dark:text-gray-400">
+              {new Date(post.publishDate).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </time>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-2 mb-3">
+              <a 
+                href={post.permalink} 
+                class="hover:text-primary dark:hover:text-blue-400 transition-colors"
+              >
+                {post.title}
+              </a>
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              {post.excerpt}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+</div>
+
+<script>
+  function initializeYearFilters() {
+    const yearFilters = document.querySelectorAll('.year-filter');
+    const resetButton = document.getElementById('reset-filter');
+    const publicationItems = document.querySelectorAll('.publication-item');
+    const container = document.getElementById('publications-container');
+
+    if (!yearFilters.length || !resetButton) return;
+
+    // Filter by year
+    yearFilters.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedYear = button.getAttribute('data-year');
+        
+        // Update button styles
+        yearFilters.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white', 'border-primary', 'dark:border-primary');
+          btn.classList.add('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
+        });
+        button.classList.add('bg-primary', 'text-white', 'border-primary', 'dark:border-primary');
+        button.classList.remove('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
+
+        // Filter publications
+        publicationItems.forEach(item => {
+          const htmlItem = item as HTMLElement;
+          const itemYear = htmlItem.getAttribute('data-year');
+          if (itemYear === selectedYear) {
+            htmlItem.style.display = 'block';
+            htmlItem.style.animation = 'fadeIn 0.3s ease-in';
+          } else {
+            htmlItem.style.display = 'none';
+          }
+        });
+
+        // Scroll to top of container
+        if (container) {
+          container.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Reset filter
+    resetButton.addEventListener('click', () => {
+      // Reset button styles
+      yearFilters.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white', 'border-primary', 'dark:border-primary');
+        btn.classList.add('border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300');
+      });
+
+      // Show all publications
+      publicationItems.forEach(item => {
+        const htmlItem = item as HTMLElement;
+        htmlItem.style.display = 'block';
+        htmlItem.style.animation = 'fadeIn 0.3s ease-in';
+      });
+
+      // Scroll to top of container
+      if (container) {
+        container.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initializeYearFilters);
+  
+  // Re-initialize on navigation (for Astro view transitions)
+  document.addEventListener('astro:page-load', initializeYearFilters);
+</script>
+
+<style>
+  /* Golden ratio spacing */
+  :root {
+    --golden-ratio: 1.618;
+    --space-base: 1rem;
+    --space-golden: calc(var(--space-base) * var(--golden-ratio));
+    --space-golden-2: calc(var(--space-golden) * var(--golden-ratio));
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Custom scrollbar for publications container */
+  #publications-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  #publications-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #publications-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #publications-container::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 4px;
+  }
+
+  #publications-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
+</style>

@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Hero3 from '~/components/widgets/Hero3.astro';
 import PublicationMetrics from '~/components/widgets/PublicationMetrics.astro';
-import Publications from '~/components/widgets/Publications.astro';
+import PublicationsWidget from '~/components/widgets/Publications.astro';
 
 import { headerData } from '~/navigation';
 
@@ -72,7 +72,7 @@ const publicationsList = publicationsData.publications || [];
 
   <!-- Publications Widget ******************* -->
 
-  <Publications
+  <PublicationsWidget
     title="Published Research"
     subtitle="Complete list of our peer-reviewed publications organized by year"
     publications={publicationsList}

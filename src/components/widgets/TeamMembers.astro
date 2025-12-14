@@ -18,6 +18,17 @@ const {
 } = Astro.props;
 
 const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Research Assistants', 'MSc Students'];
+
+// Function to generate personal page slug
+const getPersonalSlug = (name: string) => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-');
+};
+
+// Excluded members who don't have personal pages
+const excludedNames = ['Nadine Herzog', 'Jonathan Ray', 'Linda Grasser', 'Kathleen Wiencke'];
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -29,7 +40,7 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
       <div class="flex flex-col md:flex-row gap-8 items-start bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-8 md:p-12">
         <!-- PI Image - Golden Ratio Width (~38.2%) -->
         <div class="w-full md:w-[38.2%] flex-shrink-0">
-          <a href={principalInvestigator.webpage} target="_blank" rel="noopener noreferrer" class="block group">
+          <a href={`/personal/${getPersonalSlug(principalInvestigator.name)}`} class="block group">
             <div class="relative overflow-hidden rounded-2xl shadow-md group-hover:shadow-xl transition-shadow duration-300">
               <img
                 src={typeof principalInvestigator.image === 'string' ? principalInvestigator.image : principalInvestigator.image?.src}
@@ -43,12 +54,11 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
         <!-- PI Info - Golden Ratio Width (~61.8%) -->
         <div class="w-full md:w-[61.8%] flex flex-col justify-center">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            <a href={principalInvestigator.webpage} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+            <a href={`/personal/${getPersonalSlug(principalInvestigator.name)}`} class="hover:text-primary transition-colors">
               {principalInvestigator.name}
             </a>
           </h2>
           <p class="text-lg text-primary font-semibold mb-4">{principalInvestigator.title}</p>
-          <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{principalInvestigator.bio}</p>
           
           {principalInvestigator.research && (
             <div class="mb-3">
@@ -67,9 +77,7 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
               </a>
             )}
             <a 
-              href={principalInvestigator.webpage}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/personal/${getPersonalSlug(principalInvestigator.name)}`}
               class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all duration-300 text-sm font-medium"
             >
               View Profile →
@@ -102,11 +110,17 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
           : 'lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'
     }`}
   >
-    {members.map((member) => (
+    {members.map((member) => {
+      const hasPersonalPage = !excludedNames.includes(member.name);
+      const href = hasPersonalPage ? `/personal/${getPersonalSlug(member.name)}` : (member.webpage || '#');
+      const target = hasPersonalPage ? undefined : '_blank';
+      const rel = hasPersonalPage ? undefined : 'noopener noreferrer';
+      
+      return (
       <a
-        href={member.webpage}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={href}
+        target={target}
+        rel={rel}
         class="team-member group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
         data-category={member.category}
       >
@@ -137,7 +151,7 @@ const categories = ['All', 'PhD Candidates', 'PostDocs', 'MD Candidates', 'Resea
           <p class="text-sm text-gray-600 dark:text-gray-400 truncate">{member.title}</p>
         </div>
       </a>
-    ))}
+    );})}
     
     <!-- Join Our Team Card -->
     <a

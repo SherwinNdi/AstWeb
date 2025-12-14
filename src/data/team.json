@@ -6,11 +6,20 @@
     "category": "Principal Investigator",
     "yearJoined": 2015,
     "image": "/team/horstmann-annette.png",
-    "webpage": "https://example.com/annette-horstmann",
-    "bio": "Leading research in computational neuroscience, obesity, and decision-making. Exploring the neural mechanisms underlying eating behavior and metabolic health.",
-    "email": "annette.horstmann@example.com",
+    "webpage": "https://obrainlab.com/members/annette-horstmann/",
+    "bio": "Prof Dr Annette Horstmann studied Biology at the Ruhr-University Bochum with a focus on neurobiology with Prof Dr Klaus-Peter Hoffmann. After a one-year-stay at the Max Planck Institute (MPI) for Human Cognitive and Brain Sciences (Independent Research Group \"Attention & Awareness\", Prof John-Dylan Haynes) and completing her PhD in the Research Scientist in a cooperation project between the MPI for Human Cognitive and Brain Sciences and the Integrated Research and Treatment Center (IFB) AdiposityDiseases at the University Clinic Leipzig. Between 2013 and 2019 Prof Dr Horstmann was the head of the independent Junior Research Group \"Decision-making in obesity: neurobiology, behaviour & plasticity\" within the framework of the IFB AdiposityDiseases and in cooperation with the Department of Neurology of the MPI. She continues to be PI of the SFB 1052 project Neurocognitive Models of Behavioral Control in Obesity which also began its work in 2013. In 2019, she moved to Helsinki to take up her new role as Associate Professor at the Department of Psychology and Logopedics at the University of Helsinki. She continues to run the O'BRAIN Lab in Leipzig, Germany, and Helsinki, Finland. Methods she is using include structural and functional MRI, computerized behavioural experiments and the application of gustatory and olfactory stimuli. Her research in the field of neurobiology of human obesity was awarded with the Research Prize of the German Obesity Society in 2016.",
+    "email": "horstmann@cbs.mpg.de",
     "education": "PhD in Neuroscience",
-    "research": "Computational neuroscience, obesity, decision-making, neuroimaging"
+    "research": "Computational neuroscience, obesity, decision-making, neuroimaging",
+    "phone": "+49 341 9940–2258",
+    "address": "University of Helsinki, Behavioural & Brain Sciences, Faculty of Medicine, Department of Psychology and Logopedics, Haartmaninkatu 3, 00290 Helsinki, Finland; University of Leipzig, Medical Faculty, SFB 1052 Obesity Mechanisms, c/o Max Planck Institute for Human Cognitive & Brain Sciences, Stephanstraße 1A, 04103 Leipzig, Germany",
+    "orcid": "0000-0001-6184-8484",
+    "universityLink": "https://researchportal.helsinki.fi/en/persons/annette-horstmann",
+    "googleScholar": "https://scholar.google.de/citations?user=kGQy6cYAAAAJ",
+    "github": "",
+    "osf": "",
+    "cvUrl": "",
+    "publications": []
   },
   "members": [
     {
@@ -51,7 +60,17 @@
       "yearJoined": 2021,
       "image": "/team/kanyamibwa-arsene.png",
       "webpage": "https://example.com/arsene-kanyamibwa",
-      "bio": "Dopamine, Diet and Obesity"
+      "bio": "Dopamine, Diet and Obesity",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "orcid": "",
+      "universityLink": "",
+      "googleScholar": "",
+      "github": "",
+      "osf": "",
+      "cvUrl": "",
+      "publications": []
     },
     {
       "id": "member-5",
@@ -61,7 +80,17 @@
       "yearJoined": 2024,
       "image": "/team/chedeville-manon.png",
       "webpage": "https://example.com/manon-chedeville",
-      "bio": "Cancer-Related Cognitive Impairments and their connections to obesity"
+      "bio": "Cancer-Related Cognitive Impairments and their connections to obesity",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "orcid": "",
+      "universityLink": "",
+      "googleScholar": "",
+      "github": "",
+      "osf": "",
+      "cvUrl": "",
+      "publications": []
     },
     {
       "id": "member-6",
@@ -71,7 +100,17 @@
       "yearJoined": 2025,
       "image": "/team/nedaei-janbesaraei-sherwin.png",
       "webpage": "https://example.com/sherwin-nedaei-janbesaraei",
-      "bio": "Computational modeling of Obesity and Eating Behaviors"
+      "bio": "Computational modeling of Obesity and Eating Behaviors",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "orcid": "",
+      "universityLink": "",
+      "googleScholar": "",
+      "github": "",
+      "osf": "",
+      "cvUrl": "",
+      "publications": []
     },
     {
       "id": "member-7",
@@ -91,17 +130,37 @@
       "yearJoined": 2025,
       "image": "/team/krasikova-anna.png",
       "webpage": "https://example.com/anna-krasikova",
-      "bio": "......"
+      "bio": "......",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "orcid": "",
+      "universityLink": "",
+      "googleScholar": "",
+      "github": "",
+      "osf": "",
+      "cvUrl": "",
+      "publications": []
     },
     {
-      "id": "member-8",
+      "id": "member-9",
       "name": "Nooa Myllykoski",
       "title": "Research Assistant",
       "category": "Research Assistants",
       "yearJoined": 2025,
       "image": "/team/myllykoski-nooa.png",
       "webpage": "https://example.com/nooa-myllykoski",
-      "bio": "......"
+      "bio": "......",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "orcid": "",
+      "universityLink": "",
+      "googleScholar": "",
+      "github": "",
+      "osf": "",
+      "cvUrl": "",
+      "publications": []
     }
   ],
   "alumni": [
