@@ -1,0 +1,213 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Open Positions - Careers',
+  description: 'Join our research team. Explore open positions and learn how to apply.',
+};
+
+// Golden ratio
+const phi = 1.618;
+---
+
+<Layout metadata={metadata}>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    
+    <!-- Header Section -->
+    <div class="text-center mb-24">
+      <h1 class="text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+        Open Positions
+      </h1>
+    </div>
+
+    <!-- Main Content Grid: 38.2% / 61.8% Golden Ratio -->
+    <div class="grid grid-cols-1 lg:grid-cols-[38.2%_61.8%] gap-12 mb-24">
+      
+      <!-- Left Column (38.2%): Contact Card -->
+      <div class="lg:sticky lg:top-24 self-start">
+        <div class="bg-gradient-to-br from-primary/5 to-blue-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-xl p-8 border border-primary/20 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+              <Icon name="tabler:mail-forward" class="w-6 h-6 text-white" />
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Apply Now
+            </h2>
+          </div>
+
+          <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+            Send your application documents to:
+          </p>
+          
+          <a 
+            href="mailto:obrainlab@gmail.com"
+            class="flex items-center justify-center gap-3 w-full px-6 py-4 bg-primary hover:bg-blue-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl mb-8"
+          >
+            <Icon name="tabler:mail" class="w-5 h-5" />
+            obrainlab@gmail.com
+          </a>
+
+          <div class="space-y-4 pt-6 border-t border-gray-300 dark:border-gray-700">
+            <div class="flex items-start gap-3">
+              <Icon name="tabler:clock" class="w-5 h-5 text-primary dark:text-blue-400 flex-shrink-0 mt-1" />
+              <div>
+                <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">Deadline Notice</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">
+                  Summer internships: Apply before <strong>March 31st</strong>
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-3">
+              <Icon name="tabler:shield-check" class="w-5 h-5 text-primary dark:text-blue-400 flex-shrink-0 mt-1" />
+              <div>
+                <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">Privacy</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">
+                  Please refrain from including a photo of yourself or mentions of your age, nationality, or marital status in your application
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (61.8%): Main Content -->
+      <div class="space-y-12">
+        
+        <!-- Speculative Applications -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Speculative Applications
+            </h2>
+            <div class="h-1 w-24 bg-primary rounded-full"></div>
+          </div>
+
+          <div class="prose prose-lg dark:prose-invert max-w-none">
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              Your speculative applications are always welcome! We're constantly looking for talented and motivated researchers to join our team.
+            </p>
+          </div>
+        </section>
+
+        <!-- What to Include -->
+        <section>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Application Documents
+          </h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+              <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Cover Letter</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Explain your research interests and motivation
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+              <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">CV / Resume</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Detailed curriculum vitae with your experience
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+              <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Academic Transcripts</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Copies of your academic records
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+              <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-1">References</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Contact information for 2-3 references
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Why Join Us Section - Full Width -->
+    <section>
+      <div class="bg-gray-50 dark:bg-slate-900 rounded-2xl p-12 border border-gray-200 dark:border-gray-700">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">
+          Why Join Our Lab?
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-10">
+          <div class="text-center">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="tabler:brain" class="w-10 h-10 text-primary dark:text-blue-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Cutting-Edge Research
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Work on innovative projects in neuroscience and obesity research
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="tabler:users" class="w-10 h-10 text-primary dark:text-blue-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Collaborative Environment
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Join a diverse, international team of researchers
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="tabler:world" class="w-10 h-10 text-primary dark:text-blue-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              International Network
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Collaborate with leading institutions in Helsinki and Leipzig
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  /* Golden ratio-based spacing */
+  :root {
+    --phi: 1.618;
+    --space-base: 1rem;
+    --space-phi: calc(var(--space-base) * var(--phi)); /* 1.618rem */
+    --space-phi-2: calc(var(--space-phi) * var(--phi)); /* 2.618rem */
+    --space-phi-3: calc(var(--space-phi-2) * var(--phi)); /* 4.236rem */
+  }
+</style>

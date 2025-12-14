@@ -28,6 +28,10 @@ export const headerData = {
       href: getPermalink('/research/publications'),
     },
     {
+      text: 'Open Positions',
+      href: getPermalink('/open-positions'),
+    },
+    {
       text: 'About',
       links: [
         {

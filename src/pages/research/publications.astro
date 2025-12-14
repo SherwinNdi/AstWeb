@@ -1,18 +1,10 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
-import Hero3 from '~/components/widgets/Hero3.astro';
-import PublicationMetrics from '~/components/widgets/PublicationMetrics.astro';
-import PublicationsWidget from '~/components/widgets/Publications.astro';
+//import Icon from '~/components/common/Image.astro';
 
 import { headerData } from '~/navigation';
 
-
-
-// Update ORCID ID in fetch_publications.py (replace 0000-0000-0000-0000 with your actual ORCID)
-// Test locally: python scripts/fetch_publications.py
-// Configure GitLab scheduled pipeline to run weekly/monthly 
-//
 // Import publications from JSON file (auto-updated by CI/CD)
 import publicationsData from '~/data/publications.json';
 
@@ -22,6 +14,95 @@ const metadata = {
 
 // Extract publications array from JSON
 const publicationsList = publicationsData.publications || [];
+
+// Calculate metrics
+const totalPublications = publicationsList.length;
+const totalCitations = publicationsList.reduce((sum, pub) => sum + (pub.citations || 0), 0);
+const avgCitationsPerPaper = totalPublications > 0 ? (totalCitations / totalPublications).toFixed(1) : 0;
+
+// H-index calculation
+const citationsSorted = publicationsList
+  .map(p => p.citations || 0)
+  .sort((a, b) => b - a);
+let hIndex = 0;
+for (let i = 0; i < citationsSorted.length; i++) {
+  if (citationsSorted[i] >= i + 1) {
+    hIndex = i + 1;
+  } else {
+    break;
+  }
+}
+
+// Group publications by year
+const groupedByYear = publicationsList.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, any[]>);
+
+const sortedYears = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
+
+// Recent publications (last 5 years)
+const currentYear = new Date().getFullYear();
+const recentPublications = publicationsList.filter(p => p.year >= currentYear - 5).length;
+
+// Years active
+const years = publicationsList.map(p => p.year).filter(y => y);
+const firstYear = Math.min(...years);
+
+// Journal distribution analysis
+const journalCounts = publicationsList.reduce((acc, pub) => {
+  const journal = pub.journal || 'Other';
+  acc[journal] = (acc[journal] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+// Sort journals by count and get top journals
+const sortedJournals = Object.entries(journalCounts)
+  .sort(([, a], [, b]) => b - a)
+  .filter(([journal]) => journal !== '' && journal !== 'Other'); // Remove empty journals and 'Other'
+
+// Calculate percentages
+const journalData = sortedJournals.map(([journal, count]) => ({
+  journal,
+  count,
+  percentage: ((count / totalPublications) * 100).toFixed(1)
+}));
+
+// Research domain categorization based on journal names
+const categorizeJournal = (journal: string): string[] => {
+  const j = journal.toLowerCase();
+  const domains: string[] = [];
+  
+  if (j.includes('neuro') || j.includes('brain') || j.includes('cognit')) domains.push('Neuroscience & Cognition');
+  if (j.includes('metabol') || j.includes('nutrition') || j.includes('obesity') || j.includes('adipos') || j.includes('food') || j.includes('appetite')) domains.push('Metabolism & Nutrition');
+  if (j.includes('psychiatr') || j.includes('psycho') || j.includes('behavior')) domains.push('Psychology & Behavior');
+  if (j.includes('genet') || j.includes('molecular')) domains.push('Genetics & Molecular Biology');
+  if (j.includes('imaging') || j.includes('neuroimage')) domains.push('Neuroimaging');
+  if (j.includes('endocrin') || j.includes('diabetes')) domains.push('Endocrinology & Diabetes');
+  
+  return domains.length > 0 ? domains : ['General Science'];
+};
+
+// Count publications per domain (publications can belong to multiple domains)
+const domainCounts = publicationsList.reduce((acc, pub) => {
+  const domains = categorizeJournal(pub.journal || '');
+  domains.forEach(domain => {
+    acc[domain] = (acc[domain] || 0) + 1;
+  });
+  return acc;
+}, {} as Record<string, number>);
+
+const domainData = Object.entries(domainCounts)
+  .sort(([, a], [, b]) => b - a)
+  .map(([domain, count]) => ({
+    domain,
+    count,
+    percentage: ((count / totalPublications) * 100).toFixed(1)
+  }));
 ---
 
 <Layout metadata={metadata}>
@@ -33,50 +114,436 @@ const publicationsList = publicationsData.publications || [];
     />
   </Fragment>
 
-  <!-- Hero3 Widget ******************* -->
+  <!-- Hero Section with Golden Ratio -->
+  <section class="py-12 md:py-16 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold font-heading mb-6 text-gray-900 dark:text-white">
+          Our <span class="text-blue-600 dark:text-blue-400">Publications</span>
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+          Explore our research contributions to neuroscience, cognitive psychology, and brain development. 
+          Our work is published in leading peer-reviewed journals and presented at international conferences.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a 
+            href="https://scholar.google.de/citations?user=kGQy6cYAAAAJ"
+            target="_blank"
+            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            View on Google Scholar
+          </a>
+          <a 
+            href="https://orcid.org/0000-0001-6184-8484"
+            target="_blank"
+            class="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
+          >
+            View on ORCID
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Hero3
-    tagline="Our Research Output"
-    actions={[
-      { 
-        variant: 'primary', 
-        text: 'View on Google Scholar', 
-        href: 'https://scholar.google.de/citations?user=kGQy6cYAAAAJ',
-        target: '_blank'
-      },
-      { 
-        variant: 'secondary', 
-        text: 'View on ORCID', 
-        href: 'https://orcid.org/0000-0001-6184-8484',
-        target: '_blank'
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Our <span class="text-accent dark:text-white highlight">Publications</span>
-    </Fragment>
+  <!-- Main Content with Golden Ratio Layout: 38.2% Sidebar / 61.8% Content -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[38.2%_61.8%] gap-8">
+        
+        <!-- Sidebar: Metrics & Filters (38.2%) -->
+        <aside class="space-y-6">
+          <div class="lg:sticky lg:top-24 space-y-6">
+            
+            <!-- Top Journals Visualization -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Top Journals</h2>
+              <div class="space-y-3">
+                {journalData.slice(0, 9).map(({ journal, count, percentage }) => (
+                  <div>
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm text-gray-700 dark:text-gray-300 truncate pr-2" title={journal}>
+                        {journal.length > 30 ? journal.substring(0, 30) + '...' : journal}
+                      </span>
+                      <span class="text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">
+                        {count} ({percentage}%)
+                      </span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div 
+                        class="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all"
+                        style={`width: ${percentage}%`}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Year Filter Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Filter by Year</h2>
+              <div class="flex flex-wrap gap-2" id="yearFilters">
+                <button 
+                  class="year-filter-btn px-4 py-2 rounded-lg font-medium transition-all active"
+                  data-year="all"
+                >
+                  All Years
+                </button>
+                {sortedYears.map((year) => (
+                  <button 
+                    class="year-filter-btn px-4 py-2 rounded-lg font-medium transition-all"
+                    data-year={year}
+                  >
+                    {year}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+          </div>
+        </aside>
 
-    <Fragment slot="subtitle">
-      <span class="block text-justify">
-        Explore our latest research contributions to neuroscience, cognitive psychology, and brain development. 
-        Our work is published in leading peer-reviewed journals and presented at international conferences.
-      </span>
-    </Fragment>
-  </Hero3>
-
-  <!-- Publication Metrics Widget ******************* -->
-
-  <PublicationMetrics
-    publications={publicationsList}
-  />
-
-  <!-- Publications Widget ******************* -->
-
-  <PublicationsWidget
-    title="Published Research"
-    subtitle="Complete list of our peer-reviewed publications organized by year"
-    publications={publicationsList}
-    orcidId="0000-0001-6184-8484"
-  />
+        <!-- Main Content: Publications List (61.8%) -->
+        <main class="space-y-6">
+          <!-- Research Metrics -->
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-blue-800">
+                <div class="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2 counter" data-target={totalPublications}>0</div>
+                <div class="text-sm font-medium text-gray-700 dark:text-gray-300">Publications</div>
+              </div>
+              
+              <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl shadow-lg p-6 border border-green-200 dark:border-green-800">
+                <div class="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400 mb-2 counter" data-target={totalCitations}>0</div>
+                <div class="text-sm font-medium text-gray-700 dark:text-gray-300">Citations</div>
+              </div>
+              
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl shadow-lg p-6 border border-purple-200 dark:border-purple-800">
+                <div class="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2 counter" data-target={hIndex}>0</div>
+                <div class="text-sm font-medium text-gray-700 dark:text-gray-300">h-index</div>
+              </div>
+              
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl shadow-lg p-6 border border-orange-200 dark:border-orange-800">
+                <div class="text-4xl md:text-5xl font-bold text-orange-600 dark:text-orange-400 mb-2 counter" data-target={avgCitationsPerPaper}>0</div>
+                <div class="text-sm font-medium text-gray-700 dark:text-gray-300">Avg. Citations/Paper</div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 justify-center">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900 dark:text-white">{recentPublications}</span>
+                <span>publications in last 5 years</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>•</span>
+                <span>Active since</span>
+                <span class="font-semibold text-gray-900 dark:text-white">{firstYear}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Research Domains Horizontal Chart -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Research Domains Distribution</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 items-start">
+              <!-- Chart on Left -->
+              <div>
+                <canvas id="domainChart" style="max-height: 400px;"></canvas>
+              </div>
+              <!-- Legend on Right -->
+              <div class="space-y-3">
+                {domainData.map(({ domain, count, percentage }, index) => {
+                  const colors = [
+                    'rgba(59, 130, 246, 0.8)',
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(139, 92, 246, 0.8)',
+                    'rgba(245, 158, 11, 0.8)',
+                    'rgba(236, 72, 153, 0.8)',
+                    'rgba(20, 184, 166, 0.8)',
+                    'rgba(239, 68, 68, 0.8)',
+                  ];
+                  return (
+                    <div class="flex items-center justify-between gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                      <div class="flex items-center gap-3 flex-1 min-w-0">
+                        <div 
+                          class="w-4 h-4 rounded flex-shrink-0" 
+                          style={`background-color: ${colors[index]}`}
+                        ></div>
+                        <span class="text-sm text-gray-700 dark:text-gray-300 truncate" title={domain}>{domain}</span>
+                      </div>
+                      <span class="text-sm font-semibold text-gray-900 dark:text-white whitespace-nowrap">{count} ({percentage}%)</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Published Research</h2>
+            
+            <div class="space-y-8" id="publicationsList">
+              {sortedYears.map((year, index) => (
+                <details class="year-section group" data-year={year} open={index === 0}>
+                  <summary class="flex items-center justify-between mb-4 pb-3 border-b-2 border-blue-600 dark:border-blue-400 cursor-pointer hover:border-blue-700 dark:hover:border-blue-300 transition-colors">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                      {year}
+                      <span class="ml-3 text-sm font-normal text-gray-500 dark:text-gray-400">
+                        ({groupedByYear[year].length})
+                      </span>
+                    </h3>
+                    <svg class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  
+                  <div class="space-y-6">
+                    {groupedByYear[year].map((pub) => (
+                      <article class="publication-item pb-6 border-b border-gray-200 dark:border-gray-700 last:border-0">
+                        <h4 class="text-base font-medium text-gray-900 dark:text-gray-100 mb-2 leading-relaxed">
+                          {pub.url || pub.doi ? (
+                            <a 
+                              href={pub.url || `https://doi.org/${pub.doi}`} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                            >
+                              {pub.title}
+                            </a>
+                          ) : (
+                            pub.title
+                          )}
+                        </h4>
+                        
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                          {pub.authors}
+                        </p>
+                        
+                        {(pub.journal || pub.publisher) && (
+                          <p class="text-sm text-gray-500 dark:text-gray-500 italic mb-2">
+                            {pub.journal || pub.publisher}
+                            {pub.volume && ` ${pub.volume}`}
+                            {pub.issue && `(${pub.issue})`}
+                            {pub.pages && `, ${pub.pages}`}
+                          </p>
+                        )}
+                        
+                        <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-500">
+                          {pub.citations !== undefined && pub.citations > 0 && (
+                            <span class="font-medium">📊 {pub.citations} citations</span>
+                          )}
+                          {pub.doi && (
+                            <a 
+                              href={`https://doi.org/${pub.doi}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="hover:text-blue-600 dark:hover:text-blue-400"
+                            >
+                              DOI
+                            </a>
+                          )}
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+            
+            {publicationsList.length === 0 && (
+              <div class="text-center text-gray-500 dark:text-gray-400 py-12">
+                <p class="text-lg">No publications found.</p>
+              </div>
+            )}
+          </div>
+        </main>
+        
+      </div>
+    </div>
+  </section>
 
 </Layout>
+
+<!-- Chart.js CDN -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+  :root {
+    --phi: 1.618;
+    --space-phi: calc(1rem * var(--phi));
+    --space-phi-2: calc(var(--space-phi) * var(--phi));
+  }
+
+  .year-filter-btn {
+    background: white;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+  }
+
+  .dark .year-filter-btn {
+    background: #1f2937;
+    color: #d1d5db;
+    border-color: #374151;
+  }
+
+  .year-filter-btn:hover {
+    background: #f3f4f6;
+    border-color: #3b82f6;
+  }
+
+  .dark .year-filter-btn:hover {
+    background: #374151;
+    border-color: #60a5fa;
+  }
+
+  .year-filter-btn.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+  }
+
+  .dark .year-filter-btn.active {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+
+  .year-section {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Counter animation
+  function animateCounter(element: HTMLElement) {
+    const target = parseFloat(element.getAttribute('data-target') || '0');
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+    
+    const isDecimal = target % 1 !== 0;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      element.textContent = isDecimal ? current.toFixed(1) : Math.floor(current).toString();
+    }, 16);
+  }
+  
+  // Animate counters on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.counter');
+    
+    // Use Intersection Observer to animate when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+  });
+  
+  // Year filtering functionality
+  const filterButtons = document.querySelectorAll('.year-filter-btn');
+  const yearSections = document.querySelectorAll('.year-section');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedYear = button.getAttribute('data-year');
+      
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      // Filter publications
+      yearSections.forEach(section => {
+        const htmlSection = section as HTMLElement;
+        const sectionYear = htmlSection.getAttribute('data-year');
+        
+        if (selectedYear === 'all') {
+          htmlSection.style.display = 'block';
+          // Open all sections when "All Years" is selected
+          htmlSection.setAttribute('open', '');
+        } else if (sectionYear === selectedYear) {
+          htmlSection.style.display = 'block';
+          // Open the selected year section
+          htmlSection.setAttribute('open', '');
+        } else {
+          htmlSection.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<script is:inline define:vars={{ domainData }}>
+  // Research Domains Donut Chart
+  document.addEventListener('DOMContentLoaded', () => {
+    const ctx = document.getElementById('domainChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+    
+    // Check for dark mode
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    // Color palette for domains
+    const colors = [
+      'rgba(59, 130, 246, 0.8)',   // Blue
+      'rgba(16, 185, 129, 0.8)',   // Green
+      'rgba(139, 92, 246, 0.8)',   // Purple
+      'rgba(245, 158, 11, 0.8)',   // Orange
+      'rgba(236, 72, 153, 0.8)',   // Pink
+      'rgba(20, 184, 166, 0.8)',   // Teal
+      'rgba(239, 68, 68, 0.8)',    // Red
+    ];
+    
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: domainData.map(d => d.domain),
+        datasets: [{
+          data: domainData.map(d => d.count),
+          backgroundColor: colors.slice(0, domainData.length),
+          borderWidth: 2,
+          borderColor: isDark ? '#1f2937' : '#ffffff',
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.parsed || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `${label}: ${value} (${percentage}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
