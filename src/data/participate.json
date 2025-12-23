@@ -1,0 +1,108 @@
+{
+  "projects": [
+    {
+      "id": "lumina",
+      "title": "LUMINA Project",
+      "description": "Beyond the common symptoms induced by cancer treatments commonly experienced (e.g., nausea, fatigue…), some symptoms can persist even months after the end of their treatment. Many survivors have reported dizziness, difficulty in attention and concentration, or brief loss of memory. All of these relate to the brain and to what is called 'cognitive functions'. This project aims to explore how brain function is affected after breast cancer and how these changes impact survivors' daily lives compared to people without cancer.",
+      "projectDetails": [
+        "An online study recruiting participants with and without a history of cancer from Finland and France.",
+        "An intervention study led Finland, where breast cancer survivors will have the opportunity to try gentle brain stimulation designed to help with thinking difficulties."
+      ],
+      "about": "This project is part of the National Doctoral Education Pilot in Precision Cancer Medicine, funded by the Finnish Ministry of Education and Culture.",
+      "contactPerson": "Manon Chédeville",
+      "contactEmail": "grp-lumina@helsinki.fi",
+      "faqLink": "/lumina-study-frequently-asked-questions/",
+      "studies": [
+        {
+          "id": "lumina-online",
+          "title": "LUMINA-online",
+          "subtitle": "Help us understand how going through breast cancer affects brain function, while learning more about your own brain!",
+          "description": "We're inviting breast cancer survivors* AND women who have not had cancer to participate in a 100% online study that explores brain function, diet, and well-being after cancer.",
+          "note": "*In this instance, you are considered a 'survivor' if your active treatments (not including hormonal therapy) ended more than 3 months ago.",
+          "involved": [
+            "Engage in brain tests to assess your thinking skills",
+            "Track your food intake for a better understanding of your diet",
+            "Answer different well-being questionnaires (sleep, mood, physical activity…)"
+          ],
+          "benefits": [
+            "Get personalized feedback on your brain performance, diet, and well-being",
+            "Help advance cancer research and support breast cancer survivors",
+            "Convenient & flexible: All tasks are online, available on any device"
+          ],
+          "howItWorks": [
+            "3 short sessions (~25 min each) + 1 questionnaire session (~30 min) over 1 week (Monday, Wednesday, Friday, and Sunday)",
+            "100% online—participate from anywhere!",
+            "Sign up in minutes"
+          ],
+          "applicationLink": "https://redcap.link/lumina_participate",
+          "applicationText": "Check your eligibility & get started",
+          "status": "recruiting"
+        },
+        {
+          "id": "lumina-brain",
+          "title": "LUMINA-brain",
+          "subtitle": "Brain intervention study for breast cancer survivors in Finland",
+          "description": "Did you notice a change in your thinking after your breast cancer? Try our neural cap, it may help boost your thinking!This study looks at how the brain changes after breast cancer and whether transcranial Direct Current Stimulation (tDCS) can improve thinking skills. \n\n **tDCS is a safe, painless method that gently stimulates the brain using electrodes on the scalp. Know more about the device and how it works** [here](https://soomamedical.com/). The study runs for 11 weeks, including a 6‑week intervention. Breast cancer survivors* are randomly assigned to either real stimulation or placebo (no stimulation), and neither you nor the researchers will know which group you’re in.",
+          "note": "*In this instance, you are considered a 'survivor' if your active treatments (not including hormonal therapy) ended more than 3 months ago.",          "involved": [
+            "Gentle brain modulation",
+            "Engage in brain tests to assess your thinking skills",
+            "Track your food intake for a better understanding of your diet",
+            "Answer different well-being questionnaires (sleep, mood, physical activity…)"
+          ],
+          "benefits": [
+            "Get personalized feedback on your brain performance, diet, and well-being",
+            "Help advance cancer research and support breast cancer survivors",
+            "Convenient & flexible: All tasks are online, available on any device"
+          ],
+          "howItWorks": [
+            "1st tDCS session guided by our team (via video call or held in Helsinki)",
+            "23 next tDCS sessions (30 minutes each) at home",
+            "Sign up in minutes"
+          ],
+          "applicationLink": "https://redcap.helsinki.fi/redcap/surveys/?s=HX7C7EFYYTJPXEMY",
+          "applicationText": "Check your eligibility & get started",          "location": "Helsinki, Finland",
+          "status": "recruiting"
+        }
+      ]
+    },
+    {
+      "id": "marvel",
+      "title": "MARVEL Project",
+      "description": "Research exploring the value people associate with various common food snacks and how eating behaviors might change under different conditions.",
+      "contactPerson": "Arsene Kanyamibwa",
+      "contactEmail": "arsene.kanyamibwa@helsinki.fi",
+      "studies": [
+        {
+          "id": "marvel-study",
+          "title": "MARVEL Study",
+          "subtitle": "Join Our Study on Food Valuation and Earn €15!",
+          "description": "We are inviting participants to take part in an exciting online study that explores the value people associate with various common food snacks.",
+          "involved": [
+            "Session 1: Start the task neither hungry nor full (at least 1 hour fasted). You'll rate pictures of food on a computer screen and answer questionnaires for approximately 1.5 hours",
+            "Session 2: Begin the task after fasting for at least 4 hours. You'll bid on the same food items for 10 minutes",
+            "Final Step (Optional): Visit our facilities for a 10–15 minute body measurement"
+          ],
+          "benefits": [
+            "Compensation: Earn €15 (taxable income) for your participation",
+            "Convenience: 2/3 sessions are conducted online",
+            "Contribution: Help advance our understanding of food preferences"
+          ],
+          "eligibility": [
+            "Aged 18–45 years",
+            "Resident of Finland for at least 5 years",
+            "Fluent in English",
+            "No serious medical conditions (e.g., cancer, chronic back pain), visual impairments, or color blindness",
+            "No dietary restrictions, food allergies, or sensitivities",
+            "No implanted medical devices (e.g., pacemaker)",
+            "No advanced degrees in nutrition (e.g., Master's or equivalent)",
+            "Smoking less than 20 cigarettes a week or using nicotine patches (snus)"
+          ],
+          "applicationLink": "https://redcap.link/MARVELStudyEndgame",
+          "applicationText": "Complete the survey",
+          "compensation": "€15",
+          "status": "recruiting"
+        }
+      ]
+    }
+  ]
+}
