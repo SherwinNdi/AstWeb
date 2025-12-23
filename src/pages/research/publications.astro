@@ -41,7 +41,7 @@ const groupedByYear = publicationsList.reduce((acc, pub) => {
   }
   acc[year].push(pub);
   return acc;
-}, {} as Record<number | string, any[]>);
+}, {} as Record<number | string, typeof publicationsList>);
 
 const sortedYears = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
 
@@ -156,7 +156,7 @@ const domainData = Object.entries(domainCounts)
             
             <!-- Top Journals Visualization -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Top Journals</h2>
+              <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Our Top Publishing Journals</h2>
               <div class="space-y-3">
                 {journalData.slice(0, 9).map(({ journal, count, percentage }) => (
                   <div>
@@ -244,7 +244,7 @@ const domainData = Object.entries(domainCounts)
           
           <!-- Research Domains Horizontal Chart -->
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-200 dark:border-gray-700">
-            <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Research Domains Distribution</h2>
+            <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Our Research Contributions by Domain</h2>
             <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 items-start">
               <!-- Chart on Left -->
               <div>
@@ -443,8 +443,7 @@ const domainData = Object.entries(domainCounts)
     }, 16);
   }
   
-  // Animate counters on page load
-  document.addEventListener('DOMContentLoaded', () => {
+  function initializeCounters() {
     const counters = document.querySelectorAll('.counter');
     
     // Use Intersection Observer to animate when visible
@@ -458,44 +457,56 @@ const domainData = Object.entries(domainCounts)
     }, { threshold: 0.5 });
     
     counters.forEach(counter => observer.observe(counter));
-  });
+  }
   
-  // Year filtering functionality
-  const filterButtons = document.querySelectorAll('.year-filter-btn');
-  const yearSections = document.querySelectorAll('.year-section');
+  function initializeFilters() {
+    const filterButtons = document.querySelectorAll('.year-filter-btn');
+    const yearSections = document.querySelectorAll('.year-section');
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const selectedYear = button.getAttribute('data-year');
-      
-      // Update active button
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-      
-      // Filter publications
-      yearSections.forEach(section => {
-        const htmlSection = section as HTMLElement;
-        const sectionYear = htmlSection.getAttribute('data-year');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedYear = button.getAttribute('data-year');
         
-        if (selectedYear === 'all') {
-          htmlSection.style.display = 'block';
-          // Open all sections when "All Years" is selected
-          htmlSection.setAttribute('open', '');
-        } else if (sectionYear === selectedYear) {
-          htmlSection.style.display = 'block';
-          // Open the selected year section
-          htmlSection.setAttribute('open', '');
-        } else {
-          htmlSection.style.display = 'none';
-        }
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter publications
+        yearSections.forEach(section => {
+          const htmlSection = section as HTMLElement;
+          const sectionYear = htmlSection.getAttribute('data-year');
+          
+          if (selectedYear === 'all') {
+            htmlSection.style.display = 'block';
+            // Open all sections when "All Years" is selected
+            htmlSection.setAttribute('open', '');
+          } else if (sectionYear === selectedYear) {
+            htmlSection.style.display = 'block';
+            // Open the selected year section
+            htmlSection.setAttribute('open', '');
+          } else {
+            htmlSection.style.display = 'none';
+          }
+        });
       });
     });
+  }
+  
+  // Initialize on both DOMContentLoaded and astro:page-load (for client-side navigation)
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeCounters();
+    initializeFilters();
+  });
+  
+  document.addEventListener('astro:page-load', () => {
+    initializeCounters();
+    initializeFilters();
   });
 </script>
 
 <script is:inline define:vars={{ domainData }}>
   // Research Domains Donut Chart
-  document.addEventListener('DOMContentLoaded', () => {
+  function initializeChart() {
     const ctx = document.getElementById('domainChart');
     if (!ctx || typeof Chart === 'undefined') return;
     
@@ -545,5 +556,9 @@ const domainData = Object.entries(domainCounts)
         }
       }
     });
-  });
+  }
+  
+  // Initialize on both DOMContentLoaded and astro:page-load
+  document.addEventListener('DOMContentLoaded', initializeChart);
+  document.addEventListener('astro:page-load', initializeChart);
 </script>
