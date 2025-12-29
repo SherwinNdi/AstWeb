@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
 import { headerData } from '~/navigation';
 
 // Import participate data
@@ -61,7 +62,7 @@ function parseMarkdown(text) {
   </section>
 
   <!-- Studies Showcase Section -->
-  <section class="py-8 md:py-10 bg-blue-50 dark:bg-transparent">
+  <section class="py-8 md:py-10 bg-white dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-8">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
@@ -153,7 +154,7 @@ function parseMarkdown(text) {
   </section>
 
   <!-- Projects Section with Golden Ratio Layout -->
-  <section class="py-8 md:py-10 bg-blue-50 dark:bg-transparent">
+  <section class="py-8 md:py-10 bg-white dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       {projects.map((project, projectIndex) => (
         <article class="mb-12 scroll-mt-20" id={project.id}>
@@ -511,7 +512,7 @@ function parseMarkdown(text) {
                           </div>
                         </div>
 
-                        <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">>
+                        <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                           <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
                             Questions? Contact us at<br/>
                             <a href={`mailto:${project.contactEmail}`} class="text-blue-600 dark:text-blue-400 hover:underline">
@@ -551,26 +552,33 @@ function parseMarkdown(text) {
     </div>
   </section>
 
-  <!-- Call-to-Action Section -->
-  <section class="py-8 md:py-10 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-700 dark:to-blue-600">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
-        Have Questions?
-      </h2>
-      <p class="text-xl text-blue-100 mb-6">
-        Our team is here to help. Feel free to reach out for more information about any of our studies.
-      </p>
-      <a 
-        href="/contact"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-      >
-        Contact Us
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
-    </div>
-  </section>
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Have Questions About Participating?"
+    subtitle="Feel free to reach out to us. We're here to help you learn more about our research studies and how you can get involved."
+    callToAction={{
+      text: 'Contact us',
+      href: '/contact',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'obrainlab@gmail.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Visit us',
+        description: 'University of Helsinki, Finland',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Learn more',
+        description: 'Explore our research values',
+        icon: 'tabler:book',
+      },
+    ]}
+  />
 
 </Layout>
 
@@ -656,7 +664,7 @@ function parseMarkdown(text) {
           
           // Show success notification
           showToast('✓ Link copied to clipboard!');
-        } catch (err) {
+        } catch {
           console.log('Clipboard API failed, using fallback'); // Debug log
           
           // Fallback for older browsers
